@@ -1,4 +1,4 @@
-[!|KanaChord_glamor_off|(./images/KanaChord_glamor_off.jpg)]: #
+![KanaChord_glamor](./images/KanaChordPlus_glamor.jpg)
 # KanaChord Plus Keyboard 【カナコード・プラス・キーボード】
 ## Overview 【概要】
 KanaChord Plus is an auxiliary keyboard that works in parallel with a standard English keyboard and generates Unicode keyboard macros to render Japanese Kana and Kanji characters.  This allows the user to immediately start typing in Japanese on any supported computer, rather that installing special software and switching language input modes on a single keyboard.  KanaChord Plus can assist the Japanese learner by providing a means to improve their skills by writing in Japanese, in addition to practicing their reading and speaking.  Note that during the composing of this README, KanaChord Plus Keyboard was used to type the Kana characters displayed.  KanaChord Plus is a follow-on project of ![KanaChord Keyboard](https://github.com/maccody/KanaChord), which supports typing of just Hiragana and Katakana Unicode characters.
@@ -8,11 +8,14 @@ The Japanese writing system consists of three components: Hiragana, Katakana, an
 ![Kana Table](./images/Kana_Table.png)
 
 ### What about Kanji? 【漢字はどうですか？】
-Kanji consists of Chinese logography and conveys main ideas and names in sentences, e.g., 私, 東京, 何 (‘I’, ‘Tokyo’, ‘what’).  There are currently about fify-thousand Kanji characters.  In Japan, it is expected that a graduating high-school student, from entering elementary school, learn the Jōyō Kanji【常用漢字】, which contains 2136 Kanji characters that are reqularly used or are contained in government documents.
+Kanji consists of Chinese logography and conveys main ideas and names in sentences, e.g., 私, 東京, 何 (‘I’, ‘Tokyo’, ‘what’).  There are currently about fify-thousand Kanji characters.  In Japan, it is expected that a graduating high-school student, from entering elementary school, learn the Jōyō Kanji【常用漢字】, which contains 2136 Kanji characters that are reqularly used or are contained in government documents.  A college graduate, especially with an advanced degree, would be expected to learn a thousand or more additional Kanji, usually associated with their major.
 
 ### Inspiration for a Keyboard 【キーボードの動機】
+Over the last century, there have been a number of mechanical and electro-mechanical keyboards have been developed to type Kana and Kanji characters.  A quick web search for 'japanese keyboard' will provide a number of interesting links to follow.  These keyboards all shared common problems.  They were very expensive and slow at typing compared to contemporary English typewriters.  Only a relatively small subset of Kanji (a few thousand) were available.  The availability of inexpensive computers in recent decades have obsoleted these typewriters, replacing purely hardware solution with ubiquitious keyboards augmented with software running on the computer.  The software implements a Input Method Editor (IME) that takes Roman (english) characters that model the Kana and predict one or more words containing Kanji. Junferno's video ![The Challenge of Making a Keyboard for Every Language](https://www.youtube.com/watch?v=MBQvN03i4-4) provides a nice overview of the difficulties of creating a keyboard that supports non-English characters, the succession of typewriters by computers with keyboards and IMEs.
+
 The layout of the Kana Table inspires a chording keyboard input method. Chording is where multiple keys are pressed simultaneously on the keyboard to obtain a desired character output.  The illustration below provides further explanation and demonstration of how chording is used on the KanaChordPlus Keyboard.
 ![Kana Chording Example](./images/Kana_Chording_Example.png)
+
 ## Features 【特徴】
 KanaChordPlus includes dynamic key coloring that provides indication of character type, Kana mode, and error feedback.  The three Shift keys on the left keypad are normally white:
 - Voicing mark, a.k.a. dakuten or ten-ten (ﾞ),
