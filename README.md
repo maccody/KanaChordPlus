@@ -1,13 +1,16 @@
 [!|KanaChord_glamor_off|(./images/KanaChord_glamor_off.jpg)]: #
-# KanaChord Plus Keyboard (カナコード・プラス・キーボード)
+# KanaChord Plus Keyboard 【カナコード・プラス・キーボード】
 ## Overview 【概要】
 KanaChord Plus is an auxiliary keyboard that works in parallel with a standard English keyboard and generates Unicode keyboard macros to render Japanese Kana and Kanji characters.  This allows the user to immediately start typing in Japanese on any supported computer, rather that installing special software and switching language input modes on a single keyboard.  KanaChord Plus can assist the Japanese learner by providing a means to improve their skills by writing in Japanese, in addition to practicing their reading and speaking.  Note that during the composing of this README, KanaChord Plus Keyboard was used to type the Kana characters displayed.  KanaChord Plus is a follow-on project of ![KanaChord Keyboard](https://github.com/maccody/KanaChord), which supports typing of just Hiragana and Katakana Unicode characters.
 
+### Writing in Japanese 【日本語で書く】
 The Japanese writing system consists of three components: Hiragana, Katakana, and Kanji. Hiragana consists of 48 syllabic characters that are used for some words of Japanese origin and grammatical sentence fragments, e.g., あなた, これ, の (‘you’, ‘this’, possessive particle).  Katakana also consists of 48 syllabic characters that are used for foreign loan words and names, e.g., テーブル, クッキー, マック (‘table’, ‘cookie’, ‘Mac’).  The table below shows the syllabary of Hiragana and Katakana, known collectively as the Kana.
 ![Kana Table](./images/Kana_Table.png)
 
-Kanji consists of Chinese logography and conveys main ideas and names in sentences, e.g., 私, 東京, 何 (‘I’, ‘Tokyo’, ‘what’).  There are thousands of unique Kanji characters.  
+### What about Kanji? 【漢字はどうですか？】
+Kanji consists of Chinese logography and conveys main ideas and names in sentences, e.g., 私, 東京, 何 (‘I’, ‘Tokyo’, ‘what’).  There are currently about fify-thousand Kanji characters.  In Japan, it is expected that a graduating high-school student, from entering elementary school, learn the Jōyō Kanji【常用漢字】, which contains 2136 Kanji characters that are reqularly used or are contained in government documents.
 
+### Inspiration for a Keyboard 【キーボードの動機】
 The layout of the Kana Table inspires a chording keyboard input method. Chording is where multiple keys are pressed simultaneously on the keyboard to obtain a desired character output.  The illustration below provides further explanation and demonstration of how chording is used on the KanaChordPlus Keyboard.
 ![Kana Chording Example](./images/Kana_Chording_Example.png)
 ## Features 【特徴】
