@@ -43,10 +43,12 @@ Keyboard error lighting with press of ! and お key combination.
 Keyboard error lighting with press of ﾞ, な, and あ key combination.
 [!|KanaChord_error_2|(./images/KanaChord_error_2.jpg)]: #
 
-A slide switch above the か key provides three user-selectable Unicode key sequences to support different computer platforms:
-- Four-characer hexidecimal Unicode value, followed by Alt-X: Supports Microsoft Word and Wordpad, and LibreOffice Writer.
-- Ctrl-Shift-u, followed by four-character hexidecimal Unicode value: Supports Linux applications like LibreOffice Writer and Firefox.
-- Option key, followed by four-character hexidecimal Unicode value: Support MacOS applications (not yet tested).
+![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
+
+- Select Macro output mode... - Menu window opens and presents three user-selectable Unicode key sequences to support different computer platforms:
+  - Four-characer hexidecimal Unicode value, followed by Alt-X: Supports Microsoft Word and Wordpad, and LibreOffice Writer.
+  - Ctrl-Shift-u, followed by four-character hexidecimal Unicode value: Supports Linux applications like LibreOffice Writer and Firefox.
+  - Option key, followed by four-character hexidecimal Unicode value: Support MacOS applications (not yet tested).
 
 ## Implementation Overview 【実装の概要】
 The primary electical componets of the KanaChord Keyboard are a Raspberry Pi Pico (RP2040) microcontroller, an Adfruit NeoKey 5x6 Ortho Snap-Apart keyboard PCB, and thirty Cherry MX mechanical key switches.  The keycaps and keyboard enclosure are 3D printed designs created with TinkerCAD.  Blank keycaps and an OpenSCAD tight-fit box generator were found on Thingiverse.  No special hardware, such as screws are needed to mount the electrical components and assemble the enclosure.  Details on the electronics, enclosure, and their assembly can be found in the hardware subdirectory.
