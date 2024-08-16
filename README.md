@@ -32,16 +32,16 @@ Punctuation keys on the top two rows of the right keypad are also normally white
 - Commonly-used quotation (「, 」,『, 』), bracket (【, 】,〈, 〉), and special (〜,※) characters.
 
 The Kana and horizontal iteration mark (ゝ,ゞ,ヽ,ヾ) keys are green for Hiragana mode or blue for Katakana mode, as selected by the mode key (ひカ) at upper right-hand corner of the right keypad.
-[!|KanaChord_installed_grn|(./images/KanaChord_installed_grn.jpg)]: #
-[!|KanaChord_installed_blu|(./images/KanaChord_installed_blu.jpg)]: #
+![KanaChordPlus_installed_grn](./images/KanaChordPlus_installed_grn.jpg)
+![KanaChordPlus_installed_blu](./images/KanaChordPlus_installed_blu.jpg)
 
 Feedback is provided to the user for incorrect key combinations by changing those keys red.  Releasing the keys will cause the keys to revert to their original colors.  Some examples are provded below:
 
 Keyboard error lighting with press of ! and お key combination.
-[!|KanaChord_error_1|(./images/KanaChord_error_1.jpg)]: #
+![KanaChordPlus_error_1](./images/KanaChordPlus_error_1.jpg)
 
 Keyboard error lighting with press of ﾞ, な, and あ key combination.
-[!|KanaChord_error_2|(./images/KanaChord_error_2.jpg)]: #
+![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
