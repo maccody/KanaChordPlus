@@ -45,12 +45,23 @@ Keyboard error lighting with press of ! and お key combination.
 Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
+### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction between this and a traditional IME is that there are no predictive capabibilities.  As the user type Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line editor window.  Below the editor window, a 'Kanji List', consisting of Japanese words and Kanji, is geneated.  Each entry in the Kanji List has a Kan, along with definitions in English, are generated.  Each entry on the list is pronounced according to the Kana present in the editor window.  The content of word and Kanji list is also regenerated, based upon the modified content of the editor window. The con.
+
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
+### Supporting Menu 【サポートメニュー】
+Pressing on the inverted caret at the upper left hand corner of the display will a display a dr
+
+- Delete last character - Deletes the last character present in the editor window.  The word and Kanji list is regenerated according to the characters now present in the 
+- Clear input and Kanji list
 - Select Macro output mode... - Menu window opens and presents three user-selectable Unicode key sequences to support different computer platforms:
   - Four-characer hexidecimal Unicode value, followed by Alt-X: Supports Microsoft Word and Wordpad, and LibreOffice Writer.
   - Ctrl-Shift-u, followed by four-character hexidecimal Unicode value: Supports Linux applications like LibreOffice Writer and Firefox.
   - Option key, followed by four-character hexidecimal Unicode value: Support MacOS applications (not yet tested).
+- Calibrate Screen... -
+
+
 
 ## Implementation Overview 【実装の概要】
 The primary electical componets of the KanaChord Keyboard are a Raspberry Pi Pico (RP2040) microcontroller, an Adfruit NeoKey 5x6 Ortho Snap-Apart keyboard PCB, and thirty Cherry MX mechanical key switches.  The keycaps and keyboard enclosure are 3D printed designs created with TinkerCAD.  Blank keycaps and an OpenSCAD tight-fit box generator were found on Thingiverse.  No special hardware, such as screws are needed to mount the electrical components and assemble the enclosure.  Details on the electronics, enclosure, and their assembly can be found in the hardware subdirectory.
