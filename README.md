@@ -20,6 +20,7 @@ The layout of the Kana table inspires a chording keyboard input method. Chordin
 
 A chording keyboard concept is sufficient for generating all of the Kana.  It is impractical for Kanji, though, as it would quickly become impractical, even with only a few dozen Kanji.  Instead, KanaChord Plus incorporates an 'incremental' IME.  As the Hiragana or Katakana are typed, they are presented on a touch screen along with a list of corresponding Kanji characters and/or Japanese words containing Kanji.  The user can either send the Kana characters typed to the computer or select one of the Kanji characters or Japanese words to replace the Kana characters and send that to the computer instead.  This is not a word-predictive IME, as the Kanji and Japanese words that are presented are only those corresponding to the Kana currently typed.
 ## Features 【特徴】
+### Dynamic Key Coloring 【動的なキーの色付け】
 KanaChordPlus includes dynamic key coloring that provides indication of character type, Kana mode, and error feedback.  The three Shift keys on the left keypad are normally white:
 - Voicing mark, a.k.a. dakuten or ten-ten (ﾞ),
 - Plosive mark, a.k.a. handakuten or maru (ﾟ),
@@ -35,6 +36,7 @@ The Kana and horizontal iteration mark (ゝ,ゞ,ヽ,ヾ) keys are green for Hira
 ![KanaChordPlus_installed_grn](./images/KanaChordPlus_installed_grn.jpg)
 ![KanaChordPlus_installed_blu](./images/KanaChordPlus_installed_blu.jpg)
 
+### Error Feeback 【エラーフィードバック】
 Feedback is provided to the user for incorrect key combinations by changing those keys red.  Releasing the keys will cause the keys to revert to their original colors.  Some examples are provded below:
 
 Keyboard error lighting with press of ! and お key combination.
