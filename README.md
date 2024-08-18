@@ -46,22 +46,19 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction between this and a traditional IME is that there are no predictive capabibilities.  As the user type Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line editor window.  Below the editor window, a 'Kanji List', consisting of Japanese words and Kanji, is geneated.  Each entry in the Kanji List has a Kan, along with definitions in English, are generated.  Each entry on the list is pronounced according to the Kana present in the editor window.  The content of word and Kanji list is also regenerated, based upon the modified content of the editor window. The con.
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction between this and a traditional IME is that there are no predictive capabibilities.  As the user type Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line editor window.  Below the editor window, a 'Kanji List', consisting of Japanese words and Kanji, is geneated.  Each entry in the Kanji List has a Kan, along with definitions in English, are generated.  Each entry on the list is pronounced according to the Kana present in the editor window.  The content of the Kanji List is also regenerated, based upon the modified content of the editor window. The con.
 
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
-### Supporting Menu 【サポートメニュー】
-Pressing on the inverted caret at the upper left hand corner of the display will a display a dr
-
-- Delete last character - Deletes the last character present in the editor window.  The word and Kanji list is regenerated according to the characters now present in the 
-- Clear input and Kanji list
-- Select Macro output mode... - Menu window opens and presents three user-selectable Unicode key sequences to support different computer platforms:
+### Support Menu 【サポートメニュー】
+Pressing on the inverted caret at the upper left hand corner of the display will a display a dropdown menu listing several support functions.  The first two entries support making changes to the editor window.  The last two entries support configuration of KanaChord Plus.
+- **Delete last character** - Deletes the last character present in the editor window.  The word and Kanji list is regenerated according to the characters now present in the editor window.  Note that the content of the Kanji List may not be valid if there is Kanji characters in the editor window.
+- **Clear input and Kanji list** - Deletes the content of the editor window and clears the Kanji List.
+- **Select Macro output mode...** - Opens a window for Unicode kee sequence selection.  Press the button labeled with a checkmark to save the selected mode to flash memory.  Press the button labeled with an **x** to close the window, abandoning any changes.  KanaChord Plus can output different Unicode key sequences to support different operating systems and applications.  There are currently three settings available:
   - Four-characer hexidecimal Unicode value, followed by Alt-X: Supports Microsoft Word and Wordpad, and LibreOffice Writer.
   - Ctrl-Shift-u, followed by four-character hexidecimal Unicode value: Supports Linux applications like LibreOffice Writer and Firefox.
-  - Option key, followed by four-character hexidecimal Unicode value: Support MacOS applications (not yet tested).
-- Calibrate Screen... -
-
-
+  - Option key, followed by four-character hexidecimal Unicode value: Supports MacOS applications (not yet tested).
+- **Calibrate Screen...** - Opens a window to propt the user to initiate touch screen calibration.  To function properly, the touch screen of the KanaChord Plus display needs to be calibrated.  When the window opens, the user has the option of starting a calibration or closing the window without performing a calibration.  Follow the instructions displayed in the window to perform the calibration.  Once the calibration steps are completed, the calibration values are automatically saved to flash memory.  The user can then close the window or repeat calibration, if desired.  Note that the first time KanaChord Plus is used after programming, the calibration screen will be automatically displayed to require the user to calibrate the touch screen.
 
 ## Implementation Overview 【実装の概要】
 The primary electical componets of the KanaChord Keyboard are a Raspberry Pi Pico (RP2040) microcontroller, an Adfruit NeoKey 5x6 Ortho Snap-Apart keyboard PCB, and thirty Cherry MX mechanical key switches.  The keycaps and keyboard enclosure are 3D printed designs created with TinkerCAD.  Blank keycaps and an OpenSCAD tight-fit box generator were found on Thingiverse.  No special hardware, such as screws are needed to mount the electrical components and assemble the enclosure.  Details on the electronics, enclosure, and their assembly can be found in the hardware subdirectory.
