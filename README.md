@@ -46,7 +46,11 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction between this and a traditional IME is that there are no predictive capabibilities.  As the user type Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line editor window.  Below the editor window, a 'Kanji List', consisting of Japanese words and Kanji, is geneated.  Each entry in the Kanji List has a Kan, along with definitions in English, are generated.  Each entry on the list is pronounced according to the Kana present in the editor window.  The content of the Kanji List is also regenerated, based upon the modified content of the editor window. The con.
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction made between this and a traditional IME is that there are no predictive capabibilities.  As the user types Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  An entry in the Kanji List has the kanji character or word (one or more Kanji, sometimes with Kana), on the left side.  The definition, presented in English, is on the right side.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window.  
+
+
+
+The content of the Kanji List is also regenerated, based upon the modified content of the editor window. The con.
 
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
