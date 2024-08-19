@@ -8,7 +8,7 @@ The Japanese writing system consists of three components: Hiragana, Katakana, an
 ![Kana Table](./images/Kana_Table.png)
 
 ### What about Kanji? 【漢字はどうですか？】
-Kanji consists of Chinese logography and conveys main ideas and names in sentences.  A Japanese word containing Kanji can consist one or more Kanji characters, e.g., 私, 東京, 何 (’, ‘Tokyo’, ‘what’), and Hiragana e.g. 買い物、ご飯、寒い ('shopping', 'meal', 'cold').  There are currently about fify-thousand Kanji characters and new ones are added on occassion.  In Japan, it is expected that a graduating high-school student, from entering elementary school, learn the Jōyō Kanji【常用漢字】, which contains 2136 Kanji characters that are reqularly used or are contained in government documents.  A college graduate, especially with an advanced degree, would be expected to learn a thousand or more additional Kanji, usually associated with their major. 
+Kanji consists of Chinese logography and conveys main ideas and names in sentences.  A Japanese word containing Kanji can consist one or more Kanji characters, e.g., 私, 東京, 何 (’, ‘Tokyo’, ‘what’), and Hiragana e.g. 買い物、ご飯、寒い ('shopping', 'meal', 'cold').  There are currently about fify-thousand Kanji characters and new ones are added on occassion.  In Japan, it is expected that a graduating high-school student, from entering elementary school, learn the Jōyō Kanji【常用漢字】, which contains 2136 Kanji characters that are reqularly used or are found in government documents.  A college graduate, especially with an advanced degree, would be expected to learn a thousand or more additional Kanji usually associated with their major. 
 
 ### Inspiration for a Keyboard 【キーボードの動機】
 Over the last century, there have been a number of mechanical and electro-mechanical keyboards have been developed to type Kana and Kanji characters.  A quick web search for 'japanese keyboard' will provide a number of interesting links to follow.  These keyboards all shared common problems.  They were very expensive and slow at typing compared to contemporary English typewriters.  Only a relatively small subset of Kanji (a few thousand) were available.
@@ -18,7 +18,7 @@ The availability of inexpensive computers in recent decades have obsoleted these
 The layout of the Kana table inspires a chording keyboard input method. Chording is where multiple keys are pressed simultaneously on the keyboard to obtain a desired character output.  The illustration below provides further explanation and demonstration of how chording is used on the KanaChordPlus Keyboard.
 ![Kana Chording Example](./images/Kana_Chording_Example.png)
 
-A chording keyboard concept is sufficient for generating all of the Kana.  It is impractical for Kanji, though, as it would quickly become impractical, even with only a few dozen Kanji.  Instead, KanaChord Plus incorporates an 'incremental' IME.  As the Hiragana or Katakana are typed, they are presented on a touch screen along with a list of corresponding Kanji characters and/or Japanese words containing Kanji.  The user can either send the Kana characters typed to the computer or select one of the Kanji characters or Japanese words to replace the Kana characters and send that to the computer instead.  This is not a word-predictive IME, as the Kanji and Japanese words that are presented are only those corresponding to the Kana currently typed.
+A chording keyboard concept is sufficient for generating all of the Kana.  It is impractical for Kanji, though, as even a chording keyboard would quickly become impractical when attempting to support more than a few dozen Kanji.  Instead, KanaChord Plus incorporates an 'incremental' IME.  As the Hiragana or Katakana are typed, they are presented on a touch screen along with a list of corresponding Kanji characters and/or Japanese words containing Kanji.  The list is updated with each new Kana character typed, incrementally.  This is not a word-predictive IME, as the Kanji and Japanese words presented are only those corresponding to the Kana currently typed.  The user can either send the Kana characters typed to the computer or select one of the Kanji characters or Japanese words to replace the Kana characters and send that to the computer instead.
 ## Features 【特徴】
 ### Dynamic Key Coloring 【動的なキーの色付け】
 KanaChordPlus includes dynamic key coloring that provides indication of character type, Kana mode, and error feedback.  The three Shift keys on the left keypad are normally white:
@@ -46,13 +46,14 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  The distinction made between this and a traditional IME is that there are no predictive capabibilities.  As the user types Kana on KanaChord Plus, the characters are presented at the top of the display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  An entry in the Kanji List has the kanji character or word (one or more Kanji, sometimes with Kana), on the left side.  The definition, presented in English, is on the right side.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window.  
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  
 
+Each entry in the Kanji List has two parts.  On the left side, the kanji character or word (one or more Kanji, sometimes with Kana) is presented.  On the right side, a definition in English is presented.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window, i.e., they are homophones, sounding the same.  
 
-
-The content of the Kanji List is also regenerated, based upon the modified content of the editor window. The con.
-
+The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry has no effect.
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
+
+
 
 ### Support Menu 【サポートメニュー】
 Pressing on the inverted caret at the upper left hand corner of the display will a display a dropdown menu listing several support functions.  The first two entries support making changes to the editor window.  The last two entries support configuration of KanaChord Plus.
