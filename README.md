@@ -46,13 +46,18 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:
+- Orange - Japanese word
+- Green - Kanji with kunyomi or Japanese reading
+- Blue - Kanji with onyomi or Chinese reading
+- Brown - Kanji with nanori or name reading
 
 Each entry in the Kanji List has two parts.  On the left side, the kanji character or word (one or more Kanji, sometimes with Kana) is presented.  On the right side, a definition in English is presented.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window, i.e., they are homophones, sounding the same.  
 
 The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry has no effect.
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
+The length of the Kana List can exceed that of the vertical extent of the display.  The list can be scrolled by dragging a finger up or down along the right portion of the list.  Up to ten entries are displayed at any time.  If more than ten entries are in the list, special list entries are provided to select the next set of less common Kanji (move down the list) and select the next set of more common Kanji (move back up the list).
 
 
 ### Support Menu 【サポートメニュー】
