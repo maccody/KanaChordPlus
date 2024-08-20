@@ -46,19 +46,24 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:  
 - Orange - Japanese word
-- Green - Kanji with kunyomi or Japanese reading
-- Blue - Kanji with onyomi or Chinese reading
-- Brown - Kanji with nanori or name reading
+- Green - The kunyomi or Japanese reading for the Kanji
+- Blue - The onyomi or Chinese reading for the Kanji
+- Brown -The nanori or name reading for the Kanji
 
 Each entry in the Kanji List has two parts.  On the left side, the kanji character or word (one or more Kanji, sometimes with Kana) is presented.  On the right side, a definition in English is presented.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window, i.e., they are homophones, sounding the same.  
 
-The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry has no effect.
+The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry will not cause a selection.  
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
 
-The length of the Kana List can exceed that of the vertical extent of the display.  The list can be scrolled by dragging a finger up or down along the right portion of the list.  Up to ten entries are displayed at any time.  If more than ten entries are in the list, special list entries are provided to select the next set of less common Kanji (move down the list) and select the next set of more common Kanji (move back up the list).
+The length of the Kana List generated can exceed that of the vertical extent of the display.  The list can be scrolled by dragging on it with a finger, up or down, along the right portion of the list.  Up to ten entries of the current list are displayed at any time.  If more than ten entries are in the list, special list entries are provided at the beginning and end of the list, as necessary. When an entry with a down arrow is shown at the bottom of the list, pressing it will cause display of the next set of less common Kanji (move further down the list).  When an entry with an up arrow at the is shown at the top of the list to select, pressing it will cause the display of the next set of more common Kanji (move back up the list).  
 
+Some Kanji characters with kunyomi readings have associated okurigana, or following Kana characters.  If the Kanji character selected from the Kanji List has a kunyomi reading (green) and has okurigana, an Okurigana Window appears.  The button in the upper left hand corner of the window contains the Kanji character by itself.  Pressing this button will dismiss the window and cause that Kanji character to replace the Kana in the Editor Window.  A Cancel buttion is in the upper right hand corner of the window.  Pressing the Cancel button dismisses the window without making any change to the Editor Window.  Below these buttons is a list of Kanji with the associated okurigana on the left and one of three remarks in English:  
+- Simple reading - The Kanji and Kana characters form a standalone word
+- Prefix reading - The Kanji and Kana characters come before other Kanji to form a word
+- Suffix rewading - The Kanji and Kana characters come after other Kanji to form a word
+Scrolling and selection for Kanji with the Okurigana Window follows the same methods and explained for the Kanji List.  
 
 ### Support Menu 【サポートメニュー】
 Pressing on the inverted caret at the upper left hand corner of the display will a display a dropdown menu listing several support functions.  The first two entries support making changes to the editor window.  The last two entries support configuration of KanaChord Plus.
