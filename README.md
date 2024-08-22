@@ -29,10 +29,10 @@ KanaChordPlus includes dynamic key coloring that provides indication of characte
 Punctuation keys on the top two rows of the right keypad are also normally white:
 - Vertical iteration mark (〳,〴,〵), continuation mark (ー), and separation (・) characters ,
 - Sentence pausing (、) and ending characters (。, ! , ?),
-- Wide space and ellipsis (…) characters,
+- Wide space (labeled **Spc**) and ellipsis (…) characters,
 - Commonly-used quotation (「, 」,『, 』), bracket (【, 】,〈, 〉), and special (〜,※) characters.
 
-The Kana and horizontal iteration mark (ゝ,ゞ,ヽ,ヾ) keys are green for Hiragana mode or blue for Katakana mode, as selected by the mode key (ひカ) at upper right-hand corner of the right keypad.
+The Kana and horizontal iteration mark (ゝ,ゞ,ヽ,ヾ、々) keys are green for Hiragana mode or blue for Katakana mode, as selected by the mode key (ひカ) at upper right-hand corner of the right keypad.
 ![KanaChordPlus_installed_grn](./images/KanaChordPlus_installed_grn.jpg)
 ![KanaChordPlus_installed_blu](./images/KanaChordPlus_installed_blu.jpg)
 
@@ -46,7 +46,11 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  Below the Editor Window, a Kanji List is generated, consisting of Japanese words and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:  
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  The Editor Window can hold up to nine characters, either Kana or Kanji.  
+
+If only Kana characters have been typed, they can be sent to the computer by pressing any punctuation or special character mentioned previously.  The Kana characters will be displayed on the computer followed by the punctuation or character pressed, with the exception of the wide space character.  Japanese writing does not normally have spaces between words, so it would be unusual to include the wide space character in the output.  To purposely display a wide space character, make sure the Editor Window is empty of characters first before pressing the wide space (**Spc**) key.
+
+Below the Editor Window, a Kanji List is generated, consisting of Japanese words with Kanji and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:  
 - Orange - Japanese word
 - Green - The kunyomi or Japanese reading for the Kanji
 - Blue - The onyomi or Chinese reading for the Kanji
@@ -56,6 +60,8 @@ Each entry in the Kanji List has two parts.  On the left side, the kanji charact
 
 The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry will not cause a selection.  
 ![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
+
+Once a Kanji or Japanese word has been selected, it can be sent to the computer by typing any Kana, punctuation, or special character.  If a Kana character is a typed, it is displayed in the Editor window, the previous content being sent to the computer.  This allows the user to build up the next set of Kana characters to form a new word or Kanji.  If a punctuation or special character is typed, it gets sent along with the current contents of the Editor Window.  The behavior of the wide space character is the same as mentioned previously, 
 
 The length of the Kana List generated can exceed that of the vertical extent of the display.  The list can be scrolled by dragging on it with a finger, up or down, along the right portion of the list.  Up to ten entries of the current list are displayed at any time.  If more than ten entries are in the list, special list entries are provided at the beginning and end of the list, as necessary. When an entry with a down arrow is shown at the bottom of the list, pressing it will cause display of the next set of less common Kanji (move further down the list).  When an entry with an up arrow at the is shown at the top of the list to select, pressing it will cause the display of the next set of more common Kanji (move back up the list).  
 
