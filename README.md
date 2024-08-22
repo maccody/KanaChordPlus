@@ -32,7 +32,7 @@ Punctuation keys on the top two rows of the right keypad are also normally white
 - Wide space (labeled **Spc**) and ellipsis (…) characters,
 - Commonly-used quotation (「, 」,『, 』), bracket (【, 】,〈, 〉), and special (〜,※) characters.
 
-The Kana and horizontal iteration mark (ゝ,ゞ,ヽ,ヾ、々) keys are green for Hiragana mode or blue for Katakana mode, as selected by the mode key (ひカ) at upper right-hand corner of the right keypad.
+The Kana and horizontal iteration mark keys (ゝ,ゞ,ヽ,ヾ、々) are green for Hiragana mode or blue for Katakana mode.  The mode is selected by the mode key (ひカ) at upper right-hand corner of the right keypad.
 ![KanaChordPlus_installed_grn](./images/KanaChordPlus_installed_grn.jpg)
 ![KanaChordPlus_installed_blu](./images/KanaChordPlus_installed_blu.jpg)
 
@@ -46,12 +46,12 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  The Editor Window can hold up to nine characters, either Kana or Kanji.  
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  Over 6000 of the most common Kanji charaters and over 5000 of the most common Japanese words containing Kanji are available in KanaChord Plus.  
 
-If only Kana characters have been typed, they can be sent to the computer by pressing any punctuation or special character mentioned previously.  The Kana characters will be displayed on the computer followed by the punctuation or character pressed, with the exception of the wide space character.  Japanese writing does not normally have spaces between words, so it would be unusual to include the wide space character in the output.  To purposely display a wide space character, make sure the Editor Window is empty of characters first before pressing the wide space (**Spc**) key.
+As Kana characters are typed, they are presented at the top of KanaChord Plus display in an single-line Editor Window.  The Editor Window can hold up to nine characters, either Kana or Kanji.  If only Kana characters have been typed, they can be sent to the computer by pressing any punctuation or special character mentioned previously.  The Kana characters will be displayed on the computer followed by the punctuation or character pressed, with the exception of the wide space character.  Japanese writing does not normally have spaces between words, so it would be unusual to include the wide space character in the output.  To purposely display a wide space character, make sure the Editor Window is empty of characters first before pressing the wide space (**Spc**) key.
 
 Below the Editor Window, a Kanji List is generated, consisting of Japanese words with Kanji and Kanji characters.  The content of the Kanji List is updated as new Kana character are entered, i.e., incrementally.  The list is displayed with Japanese words presented first, followed by Kanji characters ordered according to the most common first.  The color of each entry indicates whether it is a word or particular Kanji reading:  
-- Orange - Japanese word
+- Orange - Japanese word containing Kanji
 - Green - The kunyomi or Japanese reading for the Kanji
 - Blue - The onyomi or Chinese reading for the Kanji
 - Brown -The nanori or name reading for the Kanji
@@ -65,14 +65,15 @@ Once a Kanji or Japanese word has been selected, it can be sent to the computer 
 
 The length of the Kana List generated can exceed that of the vertical extent of the display.  The list can be scrolled by dragging on it with a finger, up or down, along the right portion of the list.  Up to ten entries of the current list are displayed at any time.  If more than ten entries are in the list, special list entries are provided at the beginning and end of the list, as necessary. When an entry with a down arrow is shown at the bottom of the list, pressing it will cause display of the next set of less common Kanji (move further down the list).  When an entry with an up arrow at the is shown at the top of the list to select, pressing it will cause the display of the next set of more common Kanji (move back up the list).  
 
-Some Kanji characters with kunyomi readings have associated okurigana, or following Kana characters.  If the Kanji character selected from the Kanji List has a kunyomi reading (green) and has okurigana, an Okurigana Window appears.  The button in the upper left hand corner of the window contains the Kanji character by itself.  Pressing this button will dismiss the window and cause that Kanji character to replace the Kana in the Editor Window.  A Cancel buttion is in the upper right hand corner of the window.  Pressing the Cancel button dismisses the window without making any change to the Editor Window.  Below these buttons is a list of Kanji with the associated okurigana on the left and one of three remarks in English:  
+Some Kanji characters with kunyomi readings have associated okurigana, or following Kana characters.  If the Kanji character selected from the Kanji List has a kunyomi reading (green) and has okurigana, an Okurigana Window appears.  The button in the upper left hand corner of the window contains the Kanji character by itself.  Pressing this button will dismiss the window and cause that Kanji character to replace the Kana in the Editor Window.  A Cancel buttion is in the upper right hand corner of the window.  Pressing the Cancel button dismisses the window without making any change to the Editor Window.  Below these buttons is a list of Kanji with the associated okurigana on the left and one of three informative remarks in English:  
 - Simple reading - The Kanji and Kana characters form a standalone word
 - Prefix reading - The Kanji and Kana characters come before other Kanji to form a word
 - Suffix rewading - The Kanji and Kana characters come after other Kanji to form a word
-Scrolling and selection for Kanji with the Okurigana Window follows the same methods and explained for the Kanji List.  
+
+Scrolling and selection of Kanji within the Okurigana Window follows the same methods as explained for the Kanji List.  
 
 ### Support Menu 【サポートメニュー】
-Pressing on the inverted caret at the upper left hand corner of the display will a display a dropdown menu listing several support functions.  The first two entries support making changes to the editor window.  The last two entries support configuration of KanaChord Plus.
+Pressing on the inverted caret at the upper left hand corner of the display will a show a dropdown menu listing several support functions.  The first two entries support making changes to the Editor Window.  The last two entries support configuration of KanaChord Plus.
 - **Delete last character** - Deletes the last character present in the editor window.  The word and Kanji list is regenerated according to the characters now present in the editor window.  Note that the content of the Kanji List may not be valid if there is Kanji characters in the editor window.
 - **Clear input and Kanji list** - Deletes the content of the editor window and clears the Kanji List.
 - **Select Macro output mode...** - Opens a window for Unicode kee sequence selection.  Press the button labeled with a checkmark to save the selected mode to flash memory.  Press the button labeled with an **x** to close the window, abandoning any changes.  KanaChord Plus can output different Unicode key sequences to support different operating systems and applications.  There are currently three settings available:
@@ -82,9 +83,9 @@ Pressing on the inverted caret at the upper left hand corner of the display will
 - **Calibrate Screen...** - Opens a window to propt the user to initiate touch screen calibration.  To function properly, the touch screen of the KanaChord Plus display needs to be calibrated.  When the window opens, the user has the option of starting a calibration or closing the window without performing a calibration.  Follow the instructions displayed in the window to perform the calibration.  Once the calibration steps are completed, the calibration values are automatically saved to flash memory.  The user can then close the window or repeat calibration, if desired.  Note that the first time KanaChord Plus is used after programming, the calibration screen will be automatically displayed to require the user to calibrate the touch screen.
 
 ## Implementation Overview 【実装の概要】
-The primary electical componets of the KanaChord Keyboard are a Raspberry Pi Pico (RP2040) microcontroller, an Adfruit NeoKey 5x6 Ortho Snap-Apart keyboard PCB, and thirty Cherry MX mechanical key switches.  The keycaps and keyboard enclosure are 3D printed designs created with TinkerCAD.  Blank keycaps and an OpenSCAD tight-fit box generator were found on Thingiverse.  No special hardware, such as screws are needed to mount the electrical components and assemble the enclosure.  Details on the electronics, enclosure, and their assembly can be found in the hardware subdirectory.
+The primary electical componets of the KanaChord Keyboard are a Raspberry Pi Pico (RP2040) microcontroller, an Adfruit NeoKey 5x6 Ortho Snap-Apart keyboard PCB, a 2.8 inch, 320x240 TFT touch screen display using an IFI9341 controller, and thirty Cherry MX mechanical key switches.  The keycaps and keyboard enclosure are 3D printed designs created with TinkerCAD.  Blank keycaps and an OpenSCAD tight-fit box generator were found on Thingiverse.  No special hardware, such as screws are needed to mount the electrical components and assemble the enclosure.  Details on the electronics, enclosure, and their assembly can be found in the hardware subdirectory.
 
-KanachordPlus' software was developed with the Arduino IDE (version 1.8.19) and Earle Philhower's RP2040 board support package.  The USB Keyboard library, Adafruit Neopixel library, and Mark Stanley's Key and Keypad libraries provided critical software functions.  Details on the software can be found in the software subdirectory.
+KanachordPlus' software was developed with the Arduino IDE (version 1.8.19), Earle Philhower's RP2040 board support package, and LVGL (Light Versatile Graphics Library) version 8.4.  The USB Keyboard library, Adafruit Neopixel library, and Mark Stanley's Key and Keypad libraries provided critical software functions.  Details on the software can be found in the software subdirectory.
 
 ## Hardware and Software Licenses 【ハードウェアとソフイウェアのライセンス】
 ![Cc_by-nc-nd_icon svg](./images/Cc_by-nc-nd_icon.svg.png)
@@ -96,9 +97,12 @@ KanaChord Plus' source code that I wrote (KanaChordChordPlus.ino, kana.h, kbd_mg
 The slightly-modified versions of Mark Stanley's Key and Keypad libraries (Key2040.cpp, Key2040.h, Keypad2040.cpp, and Keypad2040.h) fall under the license of the original sources.
 
 ## Feedback is Welcome! 【フィードバックは大歓迎です！】
-My goal is to provide an axuilary keyboard that is useful to those who want to start writing in Japanese, while learning Japanese.  I hope to have provided operational features, keycaps, and Asian special characters that would most likely be used.  If you have recommendations for additional features, alternate keycaps, or Asian special characters, please let me know.  I will accomodate as many recommendations as feasible.
+My goal is to provide an axuilary keyboard that is useful to those who want to start writing in Japanese on a computer, while learning Japanese.  I hope to have provided operational features, keycaps, and Asian special characters that would most likely be used.  If you have recommendations for additional features, alternate keycaps, or Asian special characters, please let me know.  I will accomodate as many recommendations as feasible.
 
 ## The Future of KanaChord Plus Keyboard 【カナコード・プラス・キーボードの今後】
-[As, mentioned above, KanaChord Keyboard outputs only Kana Unicode, not Kanji Unicode.  This is an obviously glaring omission for writing in Japanese.  A software IME (Imput Method Editor) that accepts Kana Unicode input could be used to make up for this shortcoming.  This takes away from the goal of not needing to install special software.]: #
+The recent (August 2024) announcement of the Raspberry Pi Pico 2 provides a direct upgrade path for several features in KanaChord Plus:
+- Since the Pico 2 is a drop-in replacement for the Pico 1, there will be no changes in the electronics hardware, unless new capabilities are needed.
+- The higher performance of the RP2340 microcontroller will make the KanaChord Plus software run faster and be more responsive.
+- The increase in size of the flash rom from 2 MB to 4 MB will enable an significant increase in the number of Kanji and/or Japanese words supported.
 
-[To that end, I have been developing the next version of this keyboard, which also outputs Kanji Unicode. I call it KanaChord Plus Keyboard (カナコード・プラス・キーボード). It is approaching the end stages of development and I hope to release it soon.  I can say that it will output Unicodes for over 6,000 of the most commonly used Kanji. The user will be able to select from them, as they type the appropriate onyomi (Chinese), kunyomi (Japanese), or nanori (name) readings using the Kana. This will help the user learn Kanji, as they learn the proper readings and pronunciations from the Kana typed.]: #
+There will be a delay in updating KanaChord Plus to use the Pico 2, as it will take some time for component availabiltiy and updates to software libraries.  This Github site will be updated when support for the Pico 2 is realized.
