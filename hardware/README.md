@@ -5,7 +5,7 @@ KanaChord Keyboard uses following electronics parts:
 - 1 x Raspberry Pi Pico microcontroller
 - 1 x [Adfruit](https://www.adafruit.com) [NeoKey 5x6 Ortho Snap-Apart Mechanical Key Switches w/ NeoPixel - For MX Compatible Switches](https://www.adafruit.com/product/5157)
 - 30 x Cherry MX RGB frame-mount mechanical key switches, e.g., [Cherry MX Brown Switches](https://www.cherrymx.de/en/cherry-mx/mx-original/mx-brown.html) (does not count spares)
-- 1 x 2.8" 240x320 pixel TFT Display using a ILI9341 controller and a resistive touch screen using a XPT2046 controller [font], [back]
+- 1 x 2.8" 240x320 pixel TFT Display using a ILI9341 controller and a resistive touch screen using a XPT2046 controller [front](./images/display_front.jpg), [back](./images/display_back.jpg)
 - 1 x BC547 (or equivalent) NPN transistor
 - 1 x 2.2 Kohm 1/8 Watt resistor
 - 1 x 6.8 Kohm 1/8 Watt resistor
@@ -24,18 +24,21 @@ KanaChord Keyboard uses following electronics parts:
 ## Keyboard Schematics
 Below is a pictorial schematic of the keypad portion of the KanaChord keyboard.
 
-![Keypad_Schematic](./images/Keypad_Schematic.gif)
+![Keypad_Schematic](./images/KanaChord_Plus_schematic_part1.gif)
 
 While the Neopixels of the Ortho Snap-Apart board can opperate at 3.3 Volts, the 3.3-Volt regulator on the Pico cannot supply enough current.  Therefore, the Neopixels are powered by the Pico's 5-Volt VSYS output.  Consequently, a unidirectional level shifter is used to convert the low-voltage Neopixel signal, NP(LV), to a high-voltage Neopixel signal, NP(HV).  The BC547 and resistors are used to implement the unidirectional level shifter circuit.
 
-Below is a pictorial schematic of the Raspberry Pi Pico portion of the KanaChord keyboard.
+Below is a pictorial schematic of the Raspberry Pi Pico and display portion of the KanaChord keyboard.
 
-![Pico_Schematic](./images/Pico_Schematic.gif)
+![Pico_Schematic](./images/KanaChord_Plus_schematic_part2.gif)
 
-The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 22 through 24, and 36 through 39 of the Pico.  Note that the slide switch is not soldered directly to the Pico.  Instructions found in the Electrical Assembly will describe the wiring harness that is used.
+The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 22 through 27, and 36 through 39 of the Pico.  
 
 ## Electrical Assembly 
-Before assembly, the snap-apart keyboard must be broken into two pieces to form two PCBs (Printed Circuit Boards) for the left and right keypad assemblies.  As shown in the pictoral schematic above and the pictures below, cut apart the keyboard so that the bottom two rows form the left keypad and the top three rows form the right keypad.  Rather than actually bending the PCB to snap it, it is recommended to use a thin saw to cut the bridges between the rows.  DO NOT cut off the blank sections on the top and bottom of the PCB, as the mounting holes will be used to help position the keypads in the keyboard enclosure.
+Before assembly, the snap-apart keyboard must be broken into two pieces to form two PCBs (Printed Circuit Boards) for the left and right keypad assemblies.  As shown in the pictoral schematic above and the pictures below, cut apart the keyboard so that the bottom two rows form the left keypad and the top three rows form the right keypad.  
+![NeoKey_cut_apart](./images/keyboard_cut_apart.jpg)
+
+Rather than actually bending the PCB to snap it, it is recommended to use a thin saw to cut the bridges between the rows.  DO NOT cut off the blank sections on the top and bottom of the PCB, as the mounting holes will be used to help position the keypads in the keyboard enclosure.
 
 The wiring of the left keypad assembly is shown in the picture below.  Take note the direction and length of the wires that extend from the left-hand keypad PCB.
 
@@ -55,7 +58,7 @@ Next, create the female keypad interconnect harness using five (5) female crimp 
 
 Now, cut a four-conductor section of ribbon cable with a length of approximatly 28 cm (11 inches).  This will be the row cable for the right keypad.  Separate out the individual conductors for about 3 cm (1.25 inches), attach four (4) female crimp terminals, and insert the terminals into a five (5) terminal connector shell.  Note that there will be an unused place between the terminal pins for Rows 0 and 1, which is Ground Pin 18 on the Pico. Note that three of the ribbon cable conductors attach to the Row solder pads on the right keyboard PCB, while one conductor attaches to the signal input of the level shifter circuit. Note that during installation, this cable will fold over to attach to Pins 16 through 20 on the Pico.
 
-Assmble the unidirectional level shifter circuit on a small piece of prototyping board with solder pads or as otherwise desired.  The idea is to keep the resulting assembly small and relatively flat.  In the implementation shown in the picture, judicious application of heat-shrink tubing was performed to prevent short circuits.  The circuit is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the Ground and 3V3(OUT) pins, which is the 3.3V_EN pin 37 on the Pico.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to Pins 36 through 39 on the Pico. This completes the wiring of the right keypad assembly.
+The unidirectional level shifter circuit can be assembled free-form, as it only has three components.  on a small piece of prototyping board with solder pads or as otherwise desired.  The idea is to keep the resulting assembly small and relatively flat.  In the implementation shown in the picture, judicious application of heat-shrink tubing was performed to prevent short circuits.  The circuit is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the Ground and 3V3(OUT) pins, which is the 3.3V_EN pin 37 on the Pico.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to Pins 36 through 39 on the Pico. This completes the wiring of the right keypad assembly.
 
 The macro mode slide switch is soldered to a three-wire harness that is 5 cm (2 inches) long.  The harness has three (3) female connector pins crimped on and placed within a three-position connector shell. Consult the pictorial schematic above for the wiring of the switch harness. During final assembly, the connector will be placed on the header pins at positions 22 through 24.
 
