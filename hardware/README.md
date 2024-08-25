@@ -48,7 +48,17 @@ First, cut a six-conductor section of ribbon cable with a length of approximatly
 
 Next, create the male keypad interconnect harness using five (5) male crimp terminals. This is a short cable, with a length of approximately 3 cm (1.25 inches), it is recommended to use separate wires, rather than a ribbon cable. A five (5) terminal connector shell is used for this harness. Use the pictorial schematic above for wiring directions. This completes the wiring of the left keypad assembly.
 
-The wiring of the right keypad assembly is shown in the picture below. Again, take note of the direction and length of the wires that extend from the right-hand keypad PCB.
+Prior to wiring the right keypad assembly, assemble the unidirectional level shifter circuit.  This can be assembled free-form, as it only has three components.  Doing this keeps the resulting assembly small and relatively flat.  
+
+![Level Shifter Composite Image](./images/KanaChord_Plus_level_shifter_composite.jpg)
+
+1. With the flat side of the BC547 transistor facing up, bend the leads as shown.
+2. Flip the transistor's flat face down.  Solder the 2.2K resistor to the center pin of the transistor.  Solder the 6.8K resistor to the right pin of the transistor.  Cut off the excess leads on these pins.
+3. Solder insulated wires to the left pin of the transistor, the opposite end of each resistor, and at the point where the 6.8K resistor is soldered to the right pin of the transistor.  Make sure that each wire has sufficient length for wiring to the keypad.  **It is highly recommended to use wires that have insulation of different colors to keep track of their functions!**
+4. Apply heat-shrink insulation to cover up to the bottom of the transistor.  This will prevent any of the component leads from accidentally shorting.  Note that the two leads on the right side of the circut are covered with one length of shrink-wrap insulation.
+5. Cover the entire assembly with a length of heat-shrink insulation.  Doing this will 'encapsulate' the assembly and keep the pins of the transistor from bending and eventually breaking.
+
+The wiring of the right keypad assembly is shown in the picture below. Again, take note of the direction and length of the wires that extend from the right-hand keypad PCB.  
 
 ![right_keyboard_wiring](./images/right_keyboard_wiring.jpg)
 
@@ -58,9 +68,7 @@ Next, create the female keypad interconnect harness using five (5) female crimp 
 
 Now, cut a four-conductor section of ribbon cable with a length of approximatly 28 cm (11 inches).  This will be the row cable for the right keypad.  Separate out the individual conductors for about 3 cm (1.25 inches), attach four (4) female crimp terminals, and insert the terminals into a five (5) terminal connector shell.  Note that there will be an unused place between the terminal pins for Rows 0 and 1, which is Ground Pin 18 on the Pico. Note that three of the ribbon cable conductors attach to the Row solder pads on the right keyboard PCB, while one conductor attaches to the signal input of the level shifter circuit. Note that during installation, this cable will fold over to attach to Pins 16 through 20 on the Pico.
 
-The unidirectional level shifter circuit can be assembled free-form, as it only has three components.  on a small piece of prototyping board with solder pads or as otherwise desired.  The idea is to keep the resulting assembly small and relatively flat.  In the implementation shown in the picture, judicious application of heat-shrink tubing was performed to prevent short circuits.  The circuit is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the Ground and 3V3(OUT) pins, which is the 3.3V_EN pin 37 on the Pico.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to Pins 36 through 39 on the Pico. This completes the wiring of the right keypad assembly.
-
-The macro mode slide switch is soldered to a three-wire harness that is 5 cm (2 inches) long.  The harness has three (3) female connector pins crimped on and placed within a three-position connector shell. Consult the pictorial schematic above for the wiring of the switch harness. During final assembly, the connector will be placed on the header pins at positions 22 through 24.
+The level shifter is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the Ground and 3V3(OUT) pins, which is the 3.3V_EN pin 37 on the Pico.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to Pins 36 through 39 on the Pico. This completes the wiring of the right keypad assembly.
 
 ## 3D-Printed Keycaps
 The keycaps for the KanaChord Keyboard were created in TinkerCAD, as shown in the illustration below.  The STL files for the left-hand and right-hand keycap sets can be viewed with the Github STL viewer by clicking on the STL files listed above.
