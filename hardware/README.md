@@ -34,12 +34,14 @@ Below is a pictorial schematic of the Raspberry Pi Pico and display portion of t
 
 The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 22 through 27, and 36 through 39 of the Pico.  
 
-## Electrical Assembly 
+## Electrical Assembly
+### Keypad Preparation
 Before assembly, the snap-apart keyboard must be broken into two pieces to form two PCBs (Printed Circuit Boards) for the left and right keypad assemblies.  As shown in the pictoral schematic above and the pictures below, cut apart the keyboard so that the bottom two rows form the left keypad and the top three rows form the right keypad.  
 ![NeoKey_cut_apart](./images/keyboard_cut_apart.jpg)
 
 Rather than actually bending the PCB to snap it, it is recommended to use a thin saw to cut the bridges between the rows.  DO NOT cut off the blank sections on the top and bottom of the PCB, as the mounting holes will be used to help position the keypads in the keyboard enclosure.
 
+### Left Keypad Wiring
 The wiring of the left keypad assembly is shown in the picture below.  Take note the direction and length of the wires that extend from the left-hand keypad PCB.
 
 ![left_keyboard_wiring](./images/left_keyboard_wiring.jpg)
@@ -48,6 +50,7 @@ First, cut a six-conductor section of ribbon cable with a length of approximatly
 
 Next, create the male keypad interconnect harness using five (5) male crimp terminals. This is a short cable, with a length of approximately 3 cm (1.25 inches), it is recommended to use separate wires, rather than a ribbon cable. A five (5) terminal connector shell is used for this harness. Use the pictorial schematic above for wiring directions. This completes the wiring of the left keypad assembly.
 
+### Level Shifter Assembly
 Prior to wiring the right keypad assembly, assemble the unidirectional level shifter circuit.  This can be assembled free-form, as it only has three components.  Doing this keeps the resulting assembly small and relatively flat.  
 
 ![Level Shifter Composite Image](./images/KanaChord_Plus_level_shifter_composite.jpg)
@@ -58,6 +61,7 @@ Prior to wiring the right keypad assembly, assemble the unidirectional level shi
 4. Apply heat-shrink insulation to cover up to the bottom of the transistor.  This will prevent any of the component leads from accidentally shorting.  Note that the two leads on the right side of the circut are covered with one length of shrink-wrap insulation.
 5. Cover the entire assembly with a length of heat-shrink insulation.  Doing this will 'encapsulate' the assembly and keep the pins of the transistor from bending and eventually breaking.
 
+### Right Keypad Wiring
 The wiring of the right keypad assembly is shown in the picture below. Again, take note of the direction and length of the wires that extend from the right-hand keypad PCB.  
 
 ![right_keyboard_wiring](./images/right_keyboard_wiring.jpg)
@@ -68,7 +72,27 @@ Next, create the female keypad interconnect harness using five (5) female crimp 
 
 Now, cut a four-conductor section of ribbon cable with a length of approximatly 28 cm (11 inches).  This will be the row cable for the right keypad.  Separate out the individual conductors for about 3 cm (1.25 inches), attach four (4) female crimp terminals, and insert the terminals into a five (5) terminal connector shell.  Note that there will be an unused place between the terminal pins for Rows 0 and 1, which is Ground Pin 18 on the Pico. Note that three of the ribbon cable conductors attach to the Row solder pads on the right keyboard PCB, while one conductor attaches to the signal input of the level shifter circuit. Note that during installation, this cable will fold over to attach to Pins 16 through 20 on the Pico.
 
-The level shifter is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the Ground and 3V3(OUT) pins, which is the 3.3V_EN pin 37 on the Pico.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to Pins 36 through 39 on the Pico. This completes the wiring of the right keypad assembly.
+The level shifter is wired into the power harness, which is approximately 10 cm (3.5 inches) long.  The power harness has three (3) female crimp connectors that are inserted into a three (3) terminal connector shell.  Consult the pictorial schematic above for the wiring of the level shifter circiut, with the output of the level shifter connected to the Neopixel input and the power harness 5V and Ground to the right keyboard PCB. During installation, the power harness connector will attach to the Power Wye described below. This completes the wiring of the right keypad assembly.
+
+### Display Wiring
+The wiring for the display is shown in the picture below.
+
+![display_wiring](./images/KanaChord_Plus_display_wiring.jpg)
+
+Prior to attaching the wiring harness to the display pins, it is necessary to connect the respective SDI CLK, MOSI, and MISO pins of the display and touch screen interfaces, The board RESET and LED pins are also connected together.  This can be accomplished with any small gauge wire.  Kynar-insulated wire-wrap wire works well for this application.
+
+Cut a six-conductor section of ribbon cable with a length of approximatly 22 cm (8.75 inches).  This will be the SPI inteface cable for the display.  Separate out the individual conductors for about 3 cm (1.25 inches), attach six (6) female crimp terminals, and insert the terminals into a seven (7) terminal connector shell.  Note that there will be an unused place between the SPI clock and chip select, which is Ground Pin 23 on the Pico.
+
+At the other end of the wiring harness, separate out the individual conductors for about 5 cm (2 inches).  Attache the six wires to the SPI's SCK, MISO, MOSI, DC, and CS lines for the display controller and touch screen controller.  Consult the pictorial schematic of the Pico and display wiring for details.
+
+The power harness for the display consists of three wires twisted together.  The length of each wire should be about 16 cm (6.5 inches).  Attach three (3) female crimp terminals, and insert the terminals into a three (3) terminal connector shell.  Connect the other end of each wire to the 5V power, ground, and RESET/LED pins.  The RESET/LED pins are supplied 3.3V to keep the display controller running and the display fully lit.  During installation, the power harness connector will attach to the Power Wye described below. 
+
+### Power Wye
+The wiring of the power wye is shown in the picture below.  
+
+![power_wye](./images/KanaChord_Plus_power_wye.jpg)
+
+The overall length of the wires should be approximately 6 cm (2.25 inches)  Each wire is spliced half way to form two wires.  Each is covered with heat-shrink tubing.  Nine (9) crimp terminals are applded to the ends of the wires.  As shown in the picture, insert the terminals at the 'top' of the wye into two, three (3) terminal connector shells.  Make sure to keep the wiring order consistent between the two connectors.  The terminals at the 'bottom' of the wye are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the terminal pins for 2 and 4, which is 3V3_EN Pin 37 on the Pico.
 
 ## 3D-Printed Keycaps
 The keycaps for the KanaChord Keyboard were created in TinkerCAD, as shown in the illustration below.  The STL files for the left-hand and right-hand keycap sets can be viewed with the Github STL viewer by clicking on the STL files listed above.
