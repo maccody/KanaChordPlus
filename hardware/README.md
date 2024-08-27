@@ -102,7 +102,7 @@ The keycaps for the KanaChord Keyboard were created in TinkerCAD, as shown in th
 The blank keycap from makerhack's (Chris Garrett) [Custom Cherry MX Keycaps](https://www.thingiverse.com/thing:4702109) was used as the source keycap.  The design is licensed under the [Creative Commons - Attribution license](https://creativecommons.org/licenses/by/4.0/). The Kana and special charaters are text objects converted to TinkerCAD 'holes' that are combined with blank keycaps to form insets. The keycaps were sliced with Cura using the Standard Quality (0.2mm) setting, with 20% infill using the gyroid infill pattern, and Tree supports were used. The keycaps were printed with untinted PLA to allow light from the Neopixels to shine through. After printing, the insets were filled with black acrylic paint, followed by a coat of flat, clear enamel paint.
 
 ## 3D-Printed Enclosure
-The enclosure for the KanaChord Keyboard was also created in TinkerCAD, as shown in the illustrations below.  The STL files for the individual components of the enclosure can be viewed with the Github STL viewer by clicking on the STL files listed above.
+The enclosure for the KanaChord Keyboard was also created in TinkerCAD, as shown in the illustration below.  The STL files for the individual components of the enclosure can be viewed with the Github STL viewer by clicking on the STL files listed above.
 
 ![KanaChord_Plus_Keyboard_Case](./images/KanaChord_Plus_Keyboard_Case.png)
 
@@ -124,11 +124,6 @@ The Pico is mounted to the left keyboard base by first inserting the end with th
 
 ![pico_mounted_combined](./images/pico_mounted_combined.jpg)
 
-### Mounting the Macro Mode Switch
-The Macro Mode slide switch is placed into the left keyboard enclosure such that the switch handle passes through the hole in the enclosure and the tabs on each end of the switch sit around the two retaining pegs.  Once in place, the switch clip is slid into place around the switch.  Make a note of the order of the wires on the switch and connector, so that the connector is properly connected to the Pico later.
-
-![switch_install_combined](./images/switch_install_combined.jpg)
-
 ### Break-in the Key Switch Sockets
 Prior to mounting the key switches and keypad PCBs, it is highly recommended to 'break in' the key sockets on the keypads.  This is done by inserting a key switch into each key socket at least once.  The key sockets are a little 'stiff' with the first insertion of a switch.  Doing this will make it a bit easier to mount the key switches into the keypads and reduce the possibility of bending the tabs on the key switches.
 
@@ -140,9 +135,6 @@ It may be necessary to slightly widen the keyplate holes on the enclosures prior
 ![key_switch_hole_cleanup](./images/key_switch_hole_cleanup.jpg)
 
 ### Mounting Key Switches and Keypad PCBs to the Enclosures
-**NOTE: It has been determined that the positions of the mounting holes on the keypad PCBs can be a bit variant.  If it is found that the kepads will not fit on the mounting posts, it is recommended that the posts be removed.  This results in making it a bit more difficult to initially align the keypad PCBs with the keyplate holes and key switches.**
-
-**UPDATE: The spacing of the mounting posts on the keyboard cases have been updated to better fit the mounting holes on the keypad PCBs.  Follow the recommendation above if fitting problems still occur.**
 
 First, slide on the keyboard bracket on to the right keyboard enclosure.  Make sure that the bracket is inserted such that the side with the tabs flush to the bracket face is inserted first.  Next, place the three-row keypad PCB into right keyboard enclosure. The female keyboard interconnect connector, the column and row cables, and the power harness should slide through the opening in the keyboard bracket. Use the mounting pins, if present, to align the key sockets with the holes of the integral key plate.
 
