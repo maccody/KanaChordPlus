@@ -110,6 +110,8 @@ The left and right keycase enclosures were created using 0707070user's OpenSCAD 
 
 The enclosure was designed in halves to fit on the build plate of a Crealty Ender 3 Pro 3D printer.  All components were sliced with Cura using the Low Quality (0.28mm), with 20% infill using the standard in-fill pattern, and no supports were used.  The case components were prited in black PLA, although any color can be used, if desired.
 
+The screw and wingnut were created using xxx OpenSCAD program **LINK**.  It is licensed under **LICENSE**.  Print the screw horizontally, so that the layers are parallel to the long axis of the screw.  This will provide strength to the screw along the axis of tension when the wing nut is tightened.  
+
 ## Mechanical Assembly
 
 ### Applying PCB Cushions
@@ -146,6 +148,19 @@ After completing these steps the keyboard assembly show look as shown in the pic
 
 ![keyboard_assembly](./images/keyboard_assembly.jpg)
 
+### Display Assembly
+Place the display board into the display front piece.  Make sure to first remove the plastic screen protector sheet that the display board comes shipped with!  The connector of the display board should align with the wider part of the vertcal frame and the screen should be flush to the forward surface of the display front piece.  
+
+![display_assembly_part_1](./images/display_assembly_part_1.jpg)
+
+Next, position the display front piece and the display body such the the bottom of both parts are adjacent to each other.  Fold the ribbon cable and power harness to the right so that they pass over the slot on the bottom the display body.  This should appear as shown in the picture below.  
+
+![display_assembly_part_2](./images/display_assembly_part_2.jpg)
+
+Finally, flip the display front piece and display board over and thread the ribbon cable and power harness through the slot on the bottom of the display body.  Set the front piece on the display body and carefully press it until it snaps in place. DO NOT press on the display screen, as doing so could crack the display or touch screen, ruining it.  Once this is done, the display assembly should appear as in the picture below and is ready for final assembly.  Set it aside to start connecting cables to the Pico.
+
+![display_assembly_part_3](./images/display_assembly_part_3.jpg)
+
 ### Inserting Connectors onto the Pico
 Insert the female connector (four-pin shell) of the power wye cable on to pins 36 through 39 on the Pico.  Make sure that the 3.3V wire (orange) is connected to 3V3(OUT) (pin 36), the ground wire (green) is connected to GND (pin 38), and the 5V wire (red) is connected to VSYS (pin 39). Then, connect the column cable for the left keypad to pin 1 through pin 7 on the Pico.  The Column 0 (C0) wire should be connected to pin 1.  The picture below shows how the connections should look.
 
@@ -155,12 +170,19 @@ Take the arm of the power wye that is below the other arm and bend it such that 
 
 ![cable_connect_part_2](./images/cable_connect_part_2.jpg)
 
-
 Next, insert the column cable for the right keypad to pin 9 through pin 15 on the Pico. The Column 6 (C6) wire should be connected to pin 9.  Then, connect the row cable for the right keypad to pin 16 through pin 20 on the Pico. The Row 2 (R2) wire should be connected to pin 16 and the Neopixel low voltage (NP(LV)) wire should be connected to pin 20. The picture below shows how the connections should look.  
-
 
 ![cable_connect_part_3](./images/cable_connect_part_3.jpg)
 
+Attach the display bracket to the display assembly by threading the fingers of the bracket between the fingers of the bottom of the display assembly.  Make sure that the bracket is aligned such that the hexagonal hole in on the right side of the display assembly.  Insert the display assembly's ribbon cable and power harness through the slot in the top of the left keypad assembly.  The picture belows shows how this should look.
+
+![display_assembly_part_4](./images/display_assembly_part_4.jpg)
+
+Raise up the keyboard and insert the base of the display bracket into the dado slot on the left keypad.  Slide the bracket in until the back of the bracket flush with the back of the left keypad.  The picture belows shows how this should look.
+
+![display_assembly_part_5](./images/display_assembly_part_5.jpg)
+
+Plug the connector of the display assembly's ribbon cable into pins 14 through 20 of the Pico.  Note that pin 18 will not have a connector pin.  Now plug the power harness of the display assembly into the remaining arm of the power wye.  Make sure that 3.3V conductor (orange/yellow), Ground conductor (green), and 5V conductor (red) are matched up.  Otherwise a short or an over-voltage could be applied to a sensitive circuit.  The picture below shows how the connections should look.
 
 ![cable_connect_part_4](./images/cable_connect_part_4.jpg)
 
