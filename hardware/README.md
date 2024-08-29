@@ -110,7 +110,9 @@ The left and right keycase enclosures were created using 0707070user's OpenSCAD 
 
 The enclosure was designed in halves to fit on the build plate of a Crealty Ender 3 Pro 3D printer.  All components were sliced with Cura using the Low Quality (0.28mm), with 20% infill using the standard in-fill pattern, and no supports were used.  The case components were prited in black PLA, although any color can be used, if desired.
 
-The screw and wingnut were created using xxx OpenSCAD program **LINK**.  It is licensed under **LICENSE**.  Print the screw horizontally, so that the layers are parallel to the long axis of the screw.  This will provide strength to the screw along the axis of tension when the wing nut is tightened.  
+The screw and wingnut were created using mike_mattala's OpenSCAD program [NUT JOB | Nut, Bolt, Washer and Threaded Rod Factory](https://www.thingiverse.com/thing:193647).  It is licensed under [Creative Commons - Attribution - Non-Commercial license](https://creativecommons.org/licenses/by-nc/4.0/).  Print the screw horizontally, so that the layers are parallel to the long axis of the screw.  This will provide strength to the screw along the axis of tension when the wing nut is tightened.  
+
+
 
 ## Mechanical Assembly
 
@@ -174,7 +176,7 @@ Next, insert the column cable for the right keypad to pin 9 through pin 15 on th
 
 ![cable_connect_part_3](./images/cable_connect_part_3.jpg)
 
-Attach the display bracket to the display assembly by threading the fingers of the bracket between the fingers of the bottom of the display assembly.  Make sure that the bracket is aligned such that the hexagonal hole in on the right side of the display assembly.  Insert the display assembly's ribbon cable and power harness through the slot in the top of the left keypad assembly.  The picture belows shows how this should look.
+Attach the display bracket to the display assembly by threading the fingers of the bottom of the display assembly between the fingers of the bracket.  Make sure that the bracket is aligned such that the hexagonal hole is on the right side of the display assembly.  Insert the display assembly's ribbon cable and power harness through the slot in the top of the left keypad assembly.  The picture belows shows how this should look.
 
 ![display_assembly_part_4](./images/display_assembly_part_4.jpg)
 
@@ -191,7 +193,7 @@ Now that the wiring is completed, the keyboard enclosure can be closed.  Place t
 
 ![keyboard_bases_attached](./images/keyboard_bases_attached.jpg)
 
-Attach the three keyboard feet by sliding the attachment pegs into the holes and sliding the feet into the slots.  **NOTE: The pegs of the keyboard feet and the holes of the base parts have been updated to a square shape.  This was done to help keep the feet from folding over after insertion.**  If desired, the right and left keyboard feet can be glued into place.  It is not recommended to glue the center foot, as doing so would make it difficult to disassemble the keyboard for maintenance or modification.
+Attach the three keyboard feet by sliding the attachment pegs into the holes and sliding the feet into the slots.  If desired, the right and left keyboard feet can be glued into place.  It is not recommended to glue the center foot, as doing so would make it difficult to disassemble the keyboard for maintenance or modification.
 
 ![keyboard_feet_attached](./images/keyboard_feet_attached.jpg)
 
