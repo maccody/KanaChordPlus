@@ -32,7 +32,7 @@ Below is a pictorial schematic of the Raspberry Pi Pico and display portion of t
 
 ![Pico_Schematic](./images/KanaChord_Plus_schematic_part2.gif)
 
-The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 22 through 27, and 36 through 39 of the Pico.  
+The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 21 through 27, and 36 through 39 of the Pico.  
 
 ## Electrical Assembly
 ### Keypad Preparation
