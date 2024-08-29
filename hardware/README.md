@@ -147,17 +147,22 @@ After completing these steps the keyboard assembly show look as shown in the pic
 ![keyboard_assembly](./images/keyboard_assembly.jpg)
 
 ### Inserting Connectors onto the Pico
-Insert the power harness connector on to pins 36 through 39 on the Pico.  Make sure that the 3.3V wire is connected to 3V3(OUT) (pin 36), the ground wire is connected to GND (pin 38), and the 5V wire is connected to VSYS (pin 39). Then, connect the column cable for the left keypad to pin 1 through pin 7 on the Pico.  The Column 0 (C0) wire should be connected to pin 1.  The picture below shows how the connections should look.
+Insert the female connector (four-pin shell) of the power wye cable on to pins 36 through 39 on the Pico.  Make sure that the 3.3V wire (orange) is connected to 3V3(OUT) (pin 36), the ground wire (green) is connected to GND (pin 38), and the 5V wire (red) is connected to VSYS (pin 39). Then, connect the column cable for the left keypad to pin 1 through pin 7 on the Pico.  The Column 0 (C0) wire should be connected to pin 1.  The picture below shows how the connections should look.
 
 ![cable_connect_part_1](./images/cable_connect_part_1.jpg)
 
-Next, insert the column cable for the right keypad to pin 9 through pin 15 on the Pico. The Column 6 (C6) wire should be connected to pin 9.  Then, connect the row cable for the right keypad to pin 16 through pin 20 on the Pico. The Row 2 (R2) wire should be connected to pin 16 and the Neopixel low voltage (NP(LV)) wire should be connected to pin 20. The picture below shows how the connections should look.  
+Take the arm of the power wye that is below the other arm and bend it such that it can plug into the power harness of the right keypad assembly.  Make sure that 3.3V conductor (orange), Ground conductor (green), and 5V conductor (red) are matched up.  Otherwise a short or an over-voltage could be applied to a sensitive circuit.  The picture below shows how the connections should look.
 
 ![cable_connect_part_2](./images/cable_connect_part_2.jpg)
 
-Finally, insert the connector for the Macro Mode switch onto pins 22 through 24 on the Pico.  Take note that the wires of the connector are oriented such that the slide switch grounds pin 22 when switch handle is pushed towards the center of the left keyboard enclosure and pin 24 is grounded when the switch handle is pushed towards the back edge of the left keyboard enclosure. The picture below shows how the connections should look.
+
+Next, insert the column cable for the right keypad to pin 9 through pin 15 on the Pico. The Column 6 (C6) wire should be connected to pin 9.  Then, connect the row cable for the right keypad to pin 16 through pin 20 on the Pico. The Row 2 (R2) wire should be connected to pin 16 and the Neopixel low voltage (NP(LV)) wire should be connected to pin 20. The picture below shows how the connections should look.  
+
 
 ![cable_connect_part_3](./images/cable_connect_part_3.jpg)
+
+
+![cable_connect_part_4](./images/cable_connect_part_4.jpg)
 
 ### Attach Keyboard Bases and Feet
 Now that the wiring is completed, the keyboard enclosure can be closed.  Place the right keyboard base onto the bottom of the right keyboard enclosure.  Make sure that the wiring and level shifter do not interfere with the keypad PCB supports pushing up against the bottom of the right keypad.  The keyboard base is a press-fit design, so it should pop into place without too much effort.  Now, fold over the left keyboard base, making sure that the wiring does not interfere with the keypad PCB support pushing up against the bottom of the left keypad.  Snap the left keyboard base into place, as was done with the right keyboard base. The assembly should appear as shown in the picture below.
