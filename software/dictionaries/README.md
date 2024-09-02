@@ -20,11 +20,12 @@ Python libraries needed by the script
 - Mmh3 library - Murmur hash generatoin library.
 
 Describe each data file in this directory, its source, and any modifications made to simplify processing.  
-- Novel 5K most common Kanji Novel_5K.csv. Source: [Novel 5k](https://docs.google.com/spreadsheets/d/1l2MNM5OWznIRVm98bTCA1qPNAFnM48xJIyUPtchxyb0/edit?usp=sharing)
+- Novel 5K most common Kanji (Novel_5K.csv). Source: [Novel 5k](https://docs.google.com/spreadsheets/d/1l2MNM5OWznIRVm98bTCA1qPNAFnM48xJIyUPtchxyb0/edit?usp=sharing)
 - Kanji Dict (kanjidic2.xml) Source: [The KANJIDIC Project](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project)
-- Core 10K (Core10k.csv) list of over ten thousand common Japanese words with pronunciations and meanings. Source: [Core 10000](https://core6000.neocities.org/10k/)
-- Core 5K Frequency (Core5kFrequencyMod3.csv) list of over five thousand of the most common Japanese words, with pronunciations and meanings.  Modified to place single entries on each line.  Source: [Core 5000 Frequency](https://core6000.neocities.org/freq/)
-- Core 6k (Core6kMode.csv) list of over six thousand common Japanese words with pronunciations and meanings.  Modified to place single entries on each line. Source: [Core 6000](https://core6000.neocities.org/)
-- Jukujikun words (jukujikun_mod.txt) List of official and unofficial Jukujikun, or Japanese words with pronunciations that do not match the Kanji representing those words.  Modified to combine official and unofficial lists. Source: [Kanjium - the ultimate kanji resource](https://github.com/mifunetoshiro/kanjium)
-- 44492 Japanese Word frequency list (44492-japanese-words-latin-lines-removed.txt) - Source: [hingston/Japanese Github repo](https://github.com/hingston/japanese/blob/master/44492-japanese-words-latin-lines-removed.txt)
+- List of Kana characters and their corresponding least-significant byte of Unicode values (kana_list.csv).
+- Core 10K list of over ten thousand common Japanese words with pronunciations and meanings (Core10k.csv). Source: [Core 10000](https://core6000.neocities.org/10k/)
+- Core 5K Frequency list of over five thousand of the most common Japanese words, with pronunciations and meanings (Core5kFrequencyMod3.csv).  Modified to place single entries on each line.  Source: [Core 5000 Frequency](https://core6000.neocities.org/freq/)
+- Core 6k list of over six thousand common Japanese words with pronunciations and meanings (Core6kMod.csv).  Modified to place single entries on each line. Source: [Core 6000](https://core6000.neocities.org/)
+- List of official and unofficial Jukujikun, or Japanese words with pronunciations that do not match the Kanji representing those words (jukujikun_mod.txt).  Modified to combine official and unofficial lists. Source: [Kanjium - the ultimate kanji resource](https://github.com/mifunetoshiro/kanjium)
+- 44492 Japanese Word frequency list (44492-japanese-words-latin-lines-removed.txt).  Source: [hingston/Japanese Github repo](https://github.com/hingston/japanese/blob/master/44492-japanese-words-latin-lines-removed.txt)
 
