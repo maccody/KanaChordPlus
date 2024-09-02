@@ -1,4 +1,26 @@
 # KanaChord Plus Dictionaries
+KanaChord Plus 
+
+
+## Data Structures forming the Dictionaries
+
+Several approaches were considered to store the dictionaries on the Raspberry Pi Pico:
+- External flash card accessed through an SPI interface using a flash card reader library.
+- Use part of the Pico's flash ROM as a flash drive using a flash card reader library.
+- Create data structure representing the dictionaries that are stored in the flash ROM and accessed directly.
+
+Chose to store the dictionaries as directly-addressable structure stored in the Raspberry Pi Pico's flash memory.
+- QSPI interface to external flash memory faster than accessing an external flash card via SPI
+- Directly accessed data structures avoid the overhead and speed penalty of a flash card reader library.
+
+
+![Data structure relationship](./images/data_structure_relationship.gif)
+
+Use of Binary Search Tree (BST) to quickly search each dictionary.  Each node of the BST is a data structure that contains the following elements:
+- A 32-bit key that is a Murmur hash of the Kana character sequence the user types in the Editor Window.
+- A pointer to a reading structure for the Kana character sequence, which is described below.
+- Pointers to two child BST structures, which can be NULL if there is no child for a branch of the tree.
+
 
 Need to programatically generate some files, due the the large amount of data.
 - kana_kani_subset.txt - List of Unicode hexidecimal values to submit to LVGL font converter.
