@@ -1,5 +1,6 @@
 # KanaChord Plus Dictionaries
-KanaChord Plus 
+Providing Kanji support in KanaChord Plus is a challenging task!  Japanese is a phonetically limited language, with at least twelve (perhaps up to 21) distinct consonants and five distinct vowels.  The addition of mora (timing of pronunciation) and pitch accent add to the challenge.  The Kanji themselves are subject to interpretation, as the pronunciation of any particular Kanji can have Chinese roots (onyomi), Japanese roots (kunyomi), or assigned for name usage (nanori).  As a consequence, there can be many Kanji and Japanese words that are homophones (sound the same).  This Wikipedia web page on [Japanese phonology](https://en.wikipedia.org/wiki/Japanese_phonology) provides an introduction for a deeper dive into the topic.
+
 
 
 ## Data Structures forming the Dictionaries
