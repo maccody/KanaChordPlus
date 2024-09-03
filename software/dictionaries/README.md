@@ -1,6 +1,8 @@
 # KanaChord Plus Dictionaries
 Providing Kanji support in KanaChord Plus is a challenging task!  Japanese is a phonetically limited language, with at least twelve (perhaps up to 21) distinct consonants and five distinct vowels.  The addition of mora (timing of pronunciation) and pitch accent add to the challenge.  The Kanji themselves are subject to interpretation, as the pronunciation of any particular Kanji can have Chinese roots (onyomi), Japanese roots (kunyomi), or assigned for name usage (nanori).  As a consequence, there can be many Kanji and Japanese words that are homophones (sound the same).  This Wikipedia web page on [Japanese phonology](https://en.wikipedia.org/wiki/Japanese_phonology) provides an introduction for a deeper dive into the topic.
 
+And additional challenge is providing a sufficiently diverse set of Kanji to support Japanese typing for most users.  There a currently over fifty-thousand Kanji characters, although many are archaic and not in formal usage today.  Still, there are many thousands of Kanji that are in use and choosing which ones to support would be a daunting task.  Fortunately, as with other languages, some Kanji are used much more than others, which provides a starting point for which Kanji to support.  The Japanese government mandates that all Japanese students learn the 常用漢字 (jōyō kanji), or 'list of regular use Kanji', literally. These 2136 Kanji provide a minimum standard for all Japanese to communicate.  Mulitple schollars have performed frequency analysis of Kanji to create more extensive lists of frequently-used Kanji.  The Novel 5K and Kanji Dict documents are two of these lists and are used for selecting 5,000 of the most common Kanji.
+
 
 
 ## Data Structures forming the Dictionaries
