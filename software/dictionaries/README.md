@@ -1,4 +1,4 @@
-# KanaChord Plus Dictionaries
+# KanaChord Plus dictionaries
 Providing Kanji support in KanaChord Plus is a challenging task!  Japanese is a phonetically limited language, with at least twelve (perhaps up to 21) distinct consonants and five distinct vowels.  The addition of mora (timing of pronunciation) and pitch accent add to the challenge.  The Kanji themselves are subject to interpretation, as the pronunciation of any particular Kanji can have Chinese readings (onyomi), Japanese readings (kunyomi), or readings assigned for name usage (nanori).  As a consequence, there can be many Kanji and Japanese words that are homophones (sound the same), e.g., 花 (hana) flower and 鼻 (hana) nose, where pitch accent differentiates them otherwise.  This Wikipedia web page on [Japanese phonology](https://en.wikipedia.org/wiki/Japanese_phonology) provides an introduction for a deeper dive into the topic.  
 
 And additional challenge is providing a sufficiently diverse set of Kanji to support Japanese typing for most users.  There a currently over [fifty-thousand Kanji characters](https://en.wikipedia.org/wiki/Japanese_writing_system), although many are archaic and not in formal usage today.  Still, there are many thousands of Kanji that are in use and choosing which ones to support would be a daunting task.  Fortunately, as with other languages, some Kanji are used much more than others, which provides a starting point for which Kanji to support.  The Japanese government mandates that all Japanese high school graduates learn the [常用漢字 (jōyō kanji)](https://en.wikipedia.org/wiki/J%C5%8Dy%C5%8D_kanji), or 'list of regular use Kanji', literally. These 2,136 Kanji provide a minimum standard for all Japanese to read and write.  Mulitple schollars have performed frequency analysis of Kanji to create more extensive lists of frequently-used Kanji.  The [Novel 5k](https://docs.google.com/spreadsheets/d/1l2MNM5OWznIRVm98bTCA1qPNAFnM48xJIyUPtchxyb0/edit?usp=sharing) spreadsheet and [Kanji Dict 2](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project) XML document are two of these lists and are used for selecting 6,165 of the most common Kanji, with their associated meanings in English. This is the subset of Kanji that is currently supported by KanaChord Plus.  This Kanji subset should be suffcient for most users, even at the collegiate level!  Note that then number of Kanji supported also drives the size of the Kanji font character set stored on the Pico.
@@ -9,7 +9,7 @@ Beyond the Kanji are Japanese words in general, which can be composed of Hiragan
 
 Finding extensive lists (more than a few thousand) of Japanese words containing frequency ranking, reading, and English meanging proved a bit difficult.  Ultimately three Core word spreadsheets, used for Anki decks, a list of official and unofficial Jukujikun words, and a frequency-ordered list of over 44,000 Japanese words.  Not surprising, many of the most-common Japanese words consist of Kana only and are not part of the dictionary.  Of the remaining most-common words containing Kanji, 6240 are in the current dictionary, due to memory constraints (discussed below).
 
-## Data Structures forming the Dictionaries
+## Data structures forming the dictionaries
 Several approaches were considered to store the dictionaries on KanaChord Plus:
 1. External flash card accessed through the Pico's SPI interface, using a flash card reader library - plenty of storage space, relatively slower access, and driver overhead.
 2. Use part of the Pico's flash ROM as a flash drive, using a flash card reader library - Limited space (less than two megabytes), about four times faster access with QSPI compared to SPI, but same driver overhead.
@@ -30,12 +30,29 @@ During the search down the BST of a dictionary, the submitted reading hash is co
 
 The reading metadata structure provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
 - A value indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana characer sequence).
-- A pointer to an array pointers to Okurigana/Japanese word metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
+- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
 - A pointer to an array of pointers to Kanji metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
 
 
 
 
+
+Okurigana / Japanese word metadata structure
+- Number of Affix enumerations and Okurigana strings or Japanese word/meaning strings.
+- Pointer to array of Affix enumerations.  
+- Pointer to array of Okurigana or Japanese words/meanings.
+
+Kanji metadata structure
+- 16-bit Unicode value for the Kanji.
+- Number indicating rank order value - lower value is more common.
+- Character pointer to string containing English meaning for the Kanji.
+
+
+
+
+
+
+## Programmatic dictionary file generation
 Need to programatically generate some files, due the the large amount of data.
 - kana_kani_subset.txt - List of Unicode hexidecimal values to submit to LVGL font converter.
 - kanji_ms.h - Contains character strings for meanings of Kanji meaning in English.
