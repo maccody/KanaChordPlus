@@ -15,14 +15,25 @@ Several approaches were considered to store the dictionaries on KanaChord Plus:
 2. Use part of the Pico's flash ROM as a flash drive, using a flash card reader library - Limited space (less than two megabytes), about four times faster access with QSPI compared to SPI, but same driver overhead.
 3. Create data structures representing the dictionaries that are stored in the flash ROM's program memory and accessed directly - Limited storage space, though more efficient, and fastest access possible, with no drive overhead.
 
-It was decided to choose the third option for this implementation of KanaChord Plus.  Speed in retrieving Kanji and English meaning data for the Kana currently typed will impact the responsiveness of the keyboard and the overall user experience.  It is anticipated that a future version of KanaChord Plus would use a board-compatible, RP2040-based microcontroller with 4MB, 8MB, or 16MB of flash ROM.  The recent (August 2024) introduction of the Raspberry Pi Pico 2 (RP2340-based microcontroller), with 4MB of flash ROM would be a suitable replacement. The faster microcontroller could maintain or improve responsiveness, while providing extra flash ROM stoarge for either more Kanji, more Japanese words or both!  
+The third option was chosen for this implementation of KanaChord Plus.  Speed in retrieving Kanji and English meaning data for the Kana currently typed will impact the responsiveness of the keyboard and the overall user experience.  It is anticipated that a future version of KanaChord Plus would use a board-compatible, RP2040-based microcontroller with 4MB, 8MB, or 16MB of flash ROM.  The recent (August 2024) introduction of the Raspberry Pi Pico 2 (RP2340-based microcontroller), with 4MB of flash ROM would be a suitable replacement. The faster microcontroller could maintain or improve responsiveness, while providing extra flash ROM stoarge for either more Kanji, more Japanese words, or both!  
+
+Several data structures were created to store the content of the four dictionaries and support rapid dictionary search based on the kana characters currently entered.  The illustration below shows the relationship of these data structures.
 
 ![Data structure relationship](./images/data_structure_relationship.gif)
 
-Use of Binary Search Tree (BST) to quickly search each dictionary.  Each node of the BST is a data structure that contains the following elements:
-- A 32-bit key that is a Murmur hash of the Kana character sequence the user types in the Editor Window.
-- A pointer to a reading structure for the Kana character sequence, which is described below.
+A [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure contains the following elements:   
+- A 32-bit key that is a Murmur hash of a reading (Kana character sequence).
+- A pointer to a reading matadata structure for the reading used for the key.
 - Pointers to two child BST structures, which can be NULL if there is no child for a branch of the tree.
+
+During the search down the BST of a dictionary, the submitted reading hash is compared to the structure's hash key.  If the submitted hash is either less than or greater than the hash key, the search continues to the structure referenced by the appropriate pointer.  If that pointer is null, then there is no match for the submitted reading hash.  If the submitted hash is equal to the key in the current BST structure, then the pointer to the associated reading metadata structure is returned.  
+
+The reading metadata structure provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
+- A value indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana characer sequence).
+- A pointer to an array pointers to Okurigana/Japanese word metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
+- A pointer to an array of pointers to Kanji metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
+
+
 
 
 Need to programatically generate some files, due the the large amount of data.
