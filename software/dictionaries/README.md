@@ -21,21 +21,21 @@ Several data structures were created to store the content of the four dictionari
 
 ![Data structure relationship](./images/data_structure_relationship.gif)
 
-A [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure contains the following elements:   
-- A 32-bit key that is a Murmur hash of a reading (Kana character sequence).
-- A pointer to a reading matadata structure for the reading used for the key.
-- Pointers to two child BST structures, which can be NULL if there is no child for a branch of the tree.
+A [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
+- An unsigned 32-bit key that is a Murmur hash of a reading (Kana character sequence).
+- A pointer to a reading matadata structure  (reading_md* rmd) for the reading used for the key.
+- Pointers to two child BST structures (bbt_node* lnode, bbt_node* rnode), which can be NULL if there is no child for a branch of the tree.
 
 During the search down the BST of a dictionary, the submitted reading hash is compared to the structure's hash key.  If the submitted hash is either less than or greater than the hash key, the search continues to the structure referenced by the appropriate pointer.  If that pointer is null, then there is no match for the submitted reading hash.  If the submitted hash is equal to the key in the current BST structure, then the pointer to the associated reading metadata structure is returned.  
 
-The reading metadata structure provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
-- A value indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana characer sequence).
-- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
-- A pointer to an array of pointers to Kanji metadata structures.  Depending upon the dictionary, this pointer may be a null pointer.
+The reading metadata structure (reading_md) provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
+- An unsigned 16-bit value (len) indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana characer sequence).
+- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures (okuri_md** olist).  For the onyomi, kunyomi, and nanori dictionaries, this pointer will be set to the null pointer if there are no okurigana for any of the Kanji referenced.
+- A pointer to an array of pointers to Kanji metadata structures (kanji_md ** klist).  For the Japanese word dictionary, this pointer will be set to the null value.  
 
+Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the used can choose from to replace the Kana character sequence.
 
-
-
+The Okurigana/Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the onyomi, kunyomi, and nanori dictionaries, 
 
 Okurigana / Japanese word metadata structure
 - Number of Affix enumerations and Okurigana strings or Japanese word/meaning strings.
