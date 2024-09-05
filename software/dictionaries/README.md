@@ -72,7 +72,7 @@ A fairly high-level flow of the Python script is as follows:
   - Perform iteration on lambda function to combine contiguous 16-bit Unicode values into ranges (lines 6 - 9).
   - Convert a byte value into bits (lines 11 - 16).
   - Reverse the bit order of a value (lines 18 - 24).
-  - Recursively print out a balanced BST to an opened file (lines 26 - 68).
+  - print_balanced_bst - Recursively print out a balanced BST to an opened file (lines 26 - 68).
 - Define a list of common Kanji found in some Kanji lists (lines 70 - 83).
 - Load in the Novel 5K and KANJIDICT 2 dictionaries (lines 85 - 94).
 - Initialize the first data frame (df1) to hold Kanji data (line 98).
@@ -98,8 +98,41 @@ A fairly high-level flow of the Python script is as follows:
   - For each Nanori in the row (line 374):
     - Isolate Okurigana if present (lines 377 - 383).
     - Determine whether the Nanori is already in a row of the Nanori data frame, appeding the new data if it is, or adding a new row if it is not present (lines 385 - 402).
-- For each row in the Onyomi dataframe (df2), sort the Kanji for each reading by its freq list in ascending order.  Then sort the dataframe by the reading value in ascending order (lines 405 - 412).
-- 
+- For each row in the Onyomi dataframe (df2) (line 405):
+  - Sort the Kanji for each reading by its frequency list in ascending order (lines 406 - 409).
+  - Then sort the dataframe by the reading value in ascending order (line 412).
+- For each row in the Kunyomi dataframe (df3) (line 415);
+  - Sort the Kanji and associated Okurigana according to the frequency list in ascending order (line 416 - 431).
+  - Then sort the dataframe by the reading value in ascending order (line 434).
+- Sort the Nanori dataframe (df4) by the reading value in ascending order (line 445).
+- Load in a list of mappings from Kana to least-significat byte of Unicode value and converting a Python dictionary (line 447 - 451).
+- Output the Onyomi data structures to the file onyomi.h, first adding two new columns to the data frame (lines 453 - 458).
+  - Writing the structure typedefs to the file (lines 494 - 522)
+  - Iterating on each row of sorted dataframe df2Sort (line 525):
+    - Generate a Murmur3 hash key for the Kana reading (lines 526 - 536).
+    - Add the Kana representation as an integer value and a byte string to the row for generating the Balanced BST later (lines 537 - 539).
+    - Write out the Affix list, as an list of enumerations, and Okurigana metadata list as list of strings.  If all of the Affix values are 'none', this step is skipped (lines 541 - 562).
+    - Write out the list of Kanji metadata structure references (lines 564 - 569).
+    - Write out the reading metadata structure referencing the list of Okurigana pointers, or NULL if none, and the list of Kanji metadata pointers (lines 571 - 576).
+  - Write out the typedef for the Balanced BST to the file (lines 578 - 593).
+  - Pull out the columns from the sorted dataframe df2Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 595 - 599).
+  - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 597 - 603).
+- Output the Kunyomi data structures to the file kunyomi.h, first adding two new columns to the data frame (lines 609 - 614).
+  - Writing the structure typedefs to the file (lines 648 - 676)
+  - Iterating on each row of sorted dataframe df3Sort (line 679):
+    - Generate a Murmur3 hash key for the Kana reading (lines 680 - 690).
+    - Add the Kana representation as an integer value and a byte string to the row for generating the Balanced BST later (lines 691 - 693).
+    - Write out the Affix list, as an list of enumerations, and Okurigana metadata list as list of strings.  If all of the Affix values are 'none', this step is skipped (lines 695 - 785).
+    - Write out the list of Kanji metadata structure references (lines 787 - 793).
+    - Write out the reading metadata structure referencing the list of Okurigana pointers, or NULL if none, and the list of Kanji metadata pointers (lines 796 - 804).
+  - Write out the typedef for the Balanced BST to the file (lines 806 - 821).
+  - Pull out the columns from the sorted dataframe df3Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 823 - 827).
+  - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 830 - 833).
+
+
+
+
+
 
 
 
