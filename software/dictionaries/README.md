@@ -17,40 +17,40 @@ Several approaches were considered for storing the dictionaries in KanaChord Plu
 
 The third option was chosen for this implementation of KanaChord Plus.  Speed in retrieving Kanji and English meaning data for the Kana currently typed will impact the responsiveness of the keyboard and the overall user experience.  It is anticipated that a future version of KanaChord Plus would use a board-compatible, RP2040-based microcontroller with 4MB, 8MB, or 16MB of flash ROM.  The recent (August 2024) introduction of the Raspberry Pi Pico 2 (RP2340-based microcontroller) with 4MB of flash ROM, would be a suitable replacement. The faster microcontroller could maintain or improve responsiveness, while providing extra flash ROM stoarge for either more Kanji, more Japanese words, or both!  
 
-Several data structures were created to store the content of the four dictionaries and support rapid dictionary search based on the kana characters currently entered.  The illustration below shows the relationship of these data structures.  
+Several data structures were created to store the content of the four dictionaries and support rapid dictionary search based on the kana characters currently entered by the user.  The illustration below shows the relationship of these data structures.  
 ![Data structure relationship](./images/data_structure_relationship.gif)
 
-A [Balanced](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree) [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the hash implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
+A [Balanced](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree) [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation code is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
 - An unsigned 32-bit key that is a Murmur 3 hash of a reading (Kana character sequence).
 - A pointer to a reading matadata structure  (reading_md* rmd) for the supplying the data related to the reading.
 - Pointers to two child BST structures (bbt_node* lnode, bbt_node* rnode), which can be NULL if there is no child for a branch of the tree.
 
-During the search down the BST of a dictionary, the submitted reading hash is compared to each structure's hash key.  If the submitted hash is either less than or greater than the hash key, the search continues to the structure referenced by the appropriate pointer.  If that pointer is null, then there is no match for the submitted reading hash.  If the submitted hash is equal to the key in the current BST structure, then the pointer to the associated reading metadata structure is returned.  
+During the search down the BST of a dictionary, the submitted reading hash is compared to a structure's hash key.  If the submitted hash is either less than or greater than the hash key, the search continues using the structure referenced by the appropriate pointer.  If that pointer is null, then there is no match for the submitted reading hash.  If the submitted hash is equal to the key in the current BST structure, then the pointer to the associated reading metadata structure is returned.  
 
 The reading metadata structure (reading_md) provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
 - An unsigned 16-bit value (len) indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana character sequence).
-- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures (okuri_md** olist).  For the onyomi, kunyomi, and nanori dictionaries, this pointer will be set to the NULL pointer if there are no okurigana for any of the Kanji referenced.  Doing this save a lot of flash ROM storage that would otherwise be wasted.
+- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures (okuri_md** olist).  For the Onyomi, Kunyomi, and Nanori dictionaries, this pointer will be set to the NULL pointer if there are no Okurigana for any of the Kanji referenced.  Doing this saves a lot of flash ROM storage that would otherwise be wasted.
 - A pointer to an array of pointers to Kanji metadata structures (kanji_md ** klist).  For the Japanese word dictionary, this pointer will be set to the NULL value.  
 
-Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the user can choose from to replace the Kana character sequence.
+Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the user can choose from to replace the Kana character sequence that was entered.
 
-The Okurigana/Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the Onyomi, Kunyomi, and Nanori dictionaries, this metadata structure references any Okurigana associated with a Kanji.  There can be multiple Okurigana that are referenced.  For the Japanese word dictionary, this metadata structure references the Japanese word (combination of Kana and Kanji characters, encoded in UTF-8) and the meaning of the word in English.  There will be only one Japanese word and meaning referenced.
+The Okurigana / Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the Onyomi, Kunyomi, and Nanori dictionaries, this metadata structure references any Okurigana associated with a Kanji.  There can be multiple Okurigana that are referenced.  For the Japanese word dictionary, this metadata structure references the Japanese word (combination of Kana and Kanji characters, encoded in UTF-8) and the meaning of the word in English.  There will be only one Japanese word and meaning referenced.
 
 The Okurigana / Japanese word metadata structure contains the following elements:
-- An unsigned 8-bit value (len) indicating the number of Affix enumerations and Okurigana strings or Japanese word/meaning strings.
-- Pointer to array of Affix enumerations (affix_enum *alist).  For the Onyomi, Kunyomi, and Nanori dictionaries, the relevant enumerations are: none (simple reading without context) , prefix (prefix reading, placed before other Kanji), and suffix (suffix reading, placed after other Kanji).  For the Japanese word dictionary, the relevant enumerations are: jword (Japanese word in correconding index of olist) and meaning (meaning string in corresponding index of olist).  The content of alist is always one 'jword', followed by one 'meaning'.
-- Pointer to array of Okurigana or Japanese words/meanings (char **clist).  All characters are UTF-8 encoded. For the Japanese word dictionary, the first string is the Japanese word and the second string is the meaning in English.
+- An unsigned 8-bit value (len) indicating the number of Affix enumerations and Okurigana strings or Japanese word / meaning strings.
+- Pointer to array of Affix enumerations (affix_enum *alist).  For the Onyomi, Kunyomi, and Nanori dictionaries, the relevant enumerations are: none (simple reading without context) , prefix (prefix reading, placed before other Kanji), and suffix (suffix reading, placed after other Kanji).  For the Japanese word dictionary, the relevant enumerations are: jword (Japanese word in corresponding index of olist) and meaning (meaning string in corresponding index of olist).  The content of alist is always one 'jword', followed by one 'meaning'.
+- Pointer to array of Okurigana or Japanese words/meanings (char **clist).  All characters are UTF-8 encoded. For the Japanese word dictionary, the first string is always the Japanese word and the second string is always the meaning in English.
 
-The Kanji metadata structure (kanji_md) refrences information about a Kanji associated with a reading.  The Kanji metadata structure contains the following elements:
+The Kanji metadata structure (kanji_md) references information about a Kanji associated with a reading.  The Kanji metadata structure contains the following elements:
 - Unsigned 16-bit Unicode value (unicode) for the Kanji.
-- Unsigned 16-bit value indicating rank order (rank) for the Kanji - lower value is more common.
+- Unsigned 16-bit value indicating rank order (rank) for the Kanji - lower value indicates a more common Kanji.
 - Character pointer to string containing English meaning for the Kanji (char *meaning).
 
-The rank value is used when generating a list of Kanji and Japanese word for the reading (Kana characters) provided.  The list is ordered such that Japanese word are listed first, followed by Kanji, with the more common listed first.
+The rank value is used when generating a list of Kanji and Japanese words for the reading (Kana characters) provided.  The list is ordered such that Japanese word are listed first, followed by Kanji, with the more common listed first.
 
 ## Programmatic dictionary file generation
 
-**NOTE: This section is only useful if one wants to understand how the dictionary files are generated.  These files have already been generated and placed in their appropriate directories.  If you want to make changes to the dictionary files, then the Python script will need to be run and the files copied to the directory containing the other source code.**
+**NOTE: This section is only useful if one wants to understand how the various files are generated.  In this distribution, these files have already been generated and placed in their appropriate directories.  If you want to make changes to the files, then the Python script will need to be run and the files copied to the appropriate directories.**
 
 The very large number of readings and their associated Kanji characters and Japanese words made it a big challenge to create all of the data structures for the four dictionaries.  It was decided to generate the dictionaries programmatically using a Python script.  This ensured consistency of data structure content and quick regeneration, when needed, to change or correct content.
 
@@ -71,13 +71,15 @@ The following files are read by the Python script during processing:
 - 44492 Japanese Word frequency list (44492-japanese-words-latin-lines-removed.txt).  Source: [hingston/Japanese Github repo](https://github.com/hingston/japanese/blob/master/44492-japanese-words-latin-lines-removed.txt)
 
 The following files are programatically generated by the Python script:
-- kana_kani_subset.txt - List of Unicode hexidecimal values to submit to [LVGL font converter](https://lvgl.io/tools/fontconverter).
+- kana_kanji_subset.txt - List of Unicode hexidecimal values to submit to [LVGL font converter](https://lvgl.io/tools/fontconverter).
 - kanji_ms.h - Contains character strings for meanings of Kanji meaning in English.
 - kanji_md.h - Data structures containing Kanji Unicode values, rank of commonality, and references to English meaning string.
 - onyomi.h - Data structures forming the dictionary of onyomi (Chinese) readings for Kanji.
 - kunyomi.h - Data structures forming the dictionary of kunyomi (Japanese) readings for Kanji.
 - nanori.h - Data structures forming the dictionary of nanori (name) readings for Kanji.
 - dictionary.h - Data structures forming the dictionary of common Japanese words containing Kanji.
+
+Once generated, the C header files are copied to the directory containing the Arduino source code.  The file kana_kanji_subset.txt can be copied to the directory where the font file is located, but it is not strictly necessary.
 
 A fairly high-level flow of the Python script is as follows:
 - Import supporting libraries (lines 1 - 4) and define helper functions:
