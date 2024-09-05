@@ -21,7 +21,7 @@ Several data structures were created to store the content of the four dictionari
 
 ![Data structure relationship](./images/data_structure_relationship.gif)
 
-A [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
+A [Balanced](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree) [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation used is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
 - An unsigned 32-bit key that is a Murmur hash of a reading (Kana character sequence).
 - A pointer to a reading matadata structure  (reading_md* rmd) for the reading used for the key.
 - Pointers to two child BST structures (bbt_node* lnode, bbt_node* rnode), which can be NULL if there is no child for a branch of the tree.
@@ -35,26 +35,51 @@ The reading metadata structure (reading_md) provides information regarding the K
 
 Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the used can choose from to replace the Kana character sequence.
 
-The Okurigana/Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the onyomi, kunyomi, and nanori dictionaries, 
+The Okurigana/Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the onyomi, kunyomi, and nanori dictionaries, this metadata structure references any Okurigana associated with a Kanji.  There can be multiple Okurigana that are referenced.  For the Japanese word dictionary, this metadata structure references the Japanese word (combination of Kana and Kanji characters, encoded in UTF-8) and the meaning of the word in English.  There will be only one Japanese word and meaning referenced.
 
-Okurigana / Japanese word metadata structure
-- Number of Affix enumerations and Okurigana strings or Japanese word/meaning strings.
-- Pointer to array of Affix enumerations.  
-- Pointer to array of Okurigana or Japanese words/meanings.
+The Okurigana / Japanese word metadata structure contains the following elements:
+- An unsigned 8-bit value (len) indicating the number of Affix enumerations and Okurigana strings or Japanese word/meaning strings.
+- Pointer to array of Affix enumerations (affix_enum *alist).  For the onyomi, kunyomi, and nanori dictionaries, the relevant enumerations are: none (simple reading without context) , prefix (prefix reading, placed before other Kanji), and suffix (suffix reading, placed after other Kanji).  For the Japanese word dictionary, the relevant enumerations are: jword (Japanese word in correconding index of olist) and meaning (meaning string in corresponding index of olist).  The content of alist is always one 'jword', followed by one 'meaning'.
+- Pointer to array of Okurigana or Japanese words/meanings (char **clist).  All characters are UTF-8 encoded.
 
-Kanji metadata structure
-- 16-bit Unicode value for the Kanji.
-- Number indicating rank order value - lower value is more common.
-- Character pointer to string containing English meaning for the Kanji.
+The Kanji metadata structure (kanji_md) refrences information about a Kanji associated with a reading.  The Kanji metadata structure contains the following elements:
+- Unsigned 16-bit Unicode value (unicode) for the Kanji.
+- Unsigned 16-bit value indicating rank order (rank) for the Kanji - lower value is more common.
+- Character pointer to string containing English meaning for the Kanji (char *meaning).
 
-
-
-
-
+The rank value is used when generating a list of Kanji and Japanese word for the reading (Kana characters) provided.  The list is ordered such that Japanese word are listed first, followed by Kanji, with the more common listed first.
 
 ## Programmatic dictionary file generation
+The very large number of readings and their associated Kanji characters and Japanese words made it a big challenge to create all of the data structures for the four dictionaries.  It was decided to generate the dictionaries programmatically using a Python script.  This ensured consistency of data structure content and quick regeneration, when needed, to change or correct content.
+
+The Python script, kana_kanji_dictionary.py has over 1400 lines of code and comments (fortunately!).  It was developed using Python 3.8.0.  The following Python libraries required by the script:
+- XML (xml) - Extensible Markup Language library, particularly ElementTree support.
+- Pandas (pandas) - Dataframe manipulation library.
+- Itertools (itertools) - Advanced iteration function library.
+- Murmur Hash version 3 (mmh3) - Murmur hash generation library.
+
+A very high-level flow of the Python script is as follows:
+- Import supporting libraries (lines 1 - 4) and define helper functions:
+  -- Perform iteration on lambda function to combine contiguous 16-bit Unicode values into ranges (lines 6 - 9).
+  -- Convert a byte value into bits (lines 11 - 16).
+  -- Reverse the bit order of a value (lines 18 - 24).
+  -- Recursively print out a balanced BST to an opened file (lines 26 - 68).
+- Define a list of common Kanji found in some Kanji lists (lines 70 - 83).
+- Load in the Novel 5K and KANJIDICT 2 dictionaries (lines 85 - 94).
+- Initialize the first data frame (df1) to hold Kanji data (line 98).
+- Iterate on the KANJIDICT 2 'character' element and perform the following:
+  -- Extract from the character element the Kanji Unicode, Kanji character, and frequency ranking, assigning a frequency rank if one is not present (lines 101 - 113).
+- Search for the Kanji character in the Novel 5K dictionary, extracting its rank if present, or assigning one if that Kanji is not present (lines 115 - 133).
+- Construct lists of meanings, onyomi, kunyomi, and nanori associated with the Kanji character (lines 135 - 159).
+- Further processing is skipped for this Kanji if there are no readings found (lines 161 - 164).
+- Add a new row to dataframe df1 using the information collected for the Kanji (lines 166 - 169).
+- Create a subset of dataframe df1 with only those rows with Novel 5K rank less than 10000 and sort on that rank in ascending order (line 174 - 179).
+
+
+
+
 Need to programatically generate some files, due the the large amount of data.
-- kana_kani_subset.txt - List of Unicode hexidecimal values to submit to LVGL font converter.
+- kana_kani_subset.txt - List of Unicode hexidecimal values to submit to [LVGL font converter](https://lvgl.io/tools/fontconverter).
 - kanji_ms.h - Contains character strings for meanings of Kanji meaning in English.
 - kanji_md.h - Data structures containing Kanji Unicode values, rank of commonality, and references to English meaning string.
 - onyomi.h - Data structures forming the dictionary of onyomi (Chinese) readings for Kanji.
@@ -62,15 +87,6 @@ Need to programatically generate some files, due the the large amount of data.
 - nanori.h - Data structures forming the dictionary of nanori (name) readings for Kanji.
 - dictionary.h - Data structures forming the dictionary of common Japanese words containing Kanji.
 
-
-Describe the Python script and what it does.  
-
-Python libraries needed by the script
-- Xml library, particularly xml.etree.ElementTree
-- Pandas library - Dataframe manipulation
-- Itertools library
-- Freetype library?
-- Mmh3 library - Murmur hash generatoin library.
 
 Describe each data file in this directory, its source, and any modifications made to simplify processing.  
 - Novel 5K most common Kanji (Novel_5K.csv). Source: [Novel 5k](https://docs.google.com/spreadsheets/d/1l2MNM5OWznIRVm98bTCA1qPNAFnM48xJIyUPtchxyb0/edit?usp=sharing)
