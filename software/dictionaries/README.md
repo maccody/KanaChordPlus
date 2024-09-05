@@ -30,8 +30,8 @@ During the search down the BST of a dictionary, the submitted reading hash is co
 
 The reading metadata structure (reading_md) provides information regarding the Kanji and Japanese words associated with a reading.  The reading structure contains the following elements:
 - An unsigned 16-bit value (len) indicating the number of Kanji and Okurigana or Japanese words associated with the reading (Kana characer sequence).
-- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures (okuri_md** olist).  For the onyomi, kunyomi, and nanori dictionaries, this pointer will be set to the null pointer if there are no okurigana for any of the Kanji referenced.
-- A pointer to an array of pointers to Kanji metadata structures (kanji_md ** klist).  For the Japanese word dictionary, this pointer will be set to the null value.  
+- A pointer to an array of pointers to Okurigana or Japanese word/meaning metadata structures (okuri_md** olist).  For the onyomi, kunyomi, and nanori dictionaries, this pointer will be set to the NULL pointer if there are no okurigana for any of the Kanji referenced.
+- A pointer to an array of pointers to Kanji metadata structures (kanji_md ** klist).  For the Japanese word dictionary, this pointer will be set to the NULL value.  
 
 Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the used can choose from to replace the Kana character sequence.
 
@@ -58,27 +58,7 @@ The Python script, kana_kanji_dictionary.py has over 1400 lines of code and comm
 - Itertools (itertools) - Advanced iteration function library.
 - Murmur Hash version 3 (mmh3) - Murmur hash generation library.
 
-A very high-level flow of the Python script is as follows:
-- Import supporting libraries (lines 1 - 4) and define helper functions:
-  -- Perform iteration on lambda function to combine contiguous 16-bit Unicode values into ranges (lines 6 - 9).
-  -- Convert a byte value into bits (lines 11 - 16).
-  -- Reverse the bit order of a value (lines 18 - 24).
-  -- Recursively print out a balanced BST to an opened file (lines 26 - 68).
-- Define a list of common Kanji found in some Kanji lists (lines 70 - 83).
-- Load in the Novel 5K and KANJIDICT 2 dictionaries (lines 85 - 94).
-- Initialize the first data frame (df1) to hold Kanji data (line 98).
-- Iterate on the KANJIDICT 2 'character' element and perform the following:
-  -- Extract from the character element the Kanji Unicode, Kanji character, and frequency ranking, assigning a frequency rank if one is not present (lines 101 - 113).
-- Search for the Kanji character in the Novel 5K dictionary, extracting its rank if present, or assigning one if that Kanji is not present (lines 115 - 133).
-- Construct lists of meanings, onyomi, kunyomi, and nanori associated with the Kanji character (lines 135 - 159).
-- Further processing is skipped for this Kanji if there are no readings found (lines 161 - 164).
-- Add a new row to dataframe df1 using the information collected for the Kanji (lines 166 - 169).
-- Create a subset of dataframe df1 with only those rows with Novel 5K rank less than 10000 and sort on that rank in ascending order (line 174 - 179).
-
-
-
-
-Need to programatically generate some files, due the the large amount of data.
+The following files are programatically generated:
 - kana_kani_subset.txt - List of Unicode hexidecimal values to submit to [LVGL font converter](https://lvgl.io/tools/fontconverter).
 - kanji_ms.h - Contains character strings for meanings of Kanji meaning in English.
 - kanji_md.h - Data structures containing Kanji Unicode values, rank of commonality, and references to English meaning string.
@@ -86,6 +66,43 @@ Need to programatically generate some files, due the the large amount of data.
 - kunyomi.h - Data structures forming the dictionary of kunyomi (Japanese) readings for Kanji.
 - nanori.h - Data structures forming the dictionary of nanori (name) readings for Kanji.
 - dictionary.h - Data structures forming the dictionary of common Japanese words containing Kanji.
+
+A fairly high-level flow of the Python script is as follows:
+- Import supporting libraries (lines 1 - 4) and define helper functions:
+  - Perform iteration on lambda function to combine contiguous 16-bit Unicode values into ranges (lines 6 - 9).
+  - Convert a byte value into bits (lines 11 - 16).
+  - Reverse the bit order of a value (lines 18 - 24).
+  - Recursively print out a balanced BST to an opened file (lines 26 - 68).
+- Define a list of common Kanji found in some Kanji lists (lines 70 - 83).
+- Load in the Novel 5K and KANJIDICT 2 dictionaries (lines 85 - 94).
+- Initialize the first data frame (df1) to hold Kanji data (line 98).
+- Iterate on the KANJIDICT 2 'character' element and perform the following (line 100):
+  - Extract from the character element the Kanji Unicode, Kanji character, and frequency ranking, assigning a frequency rank if one is not present (lines 101 - 113).
+  - Search for the Kanji character in the Novel 5K dictionary, extracting its rank if present, or assigning one if that Kanji is not present (lines 115 - 133).
+  - Construct lists of meanings, onyomi, kunyomi, and nanori associated with the Kanji character (lines 135 - 159).
+  - Further processing is skipped for this Kanji if there are no readings found (lines 161 - 164).
+  - Add a new row to dataframe df1 using the information collected for the Kanji (lines 166 - 169).
+- Create a subset of dataframe df1 with only those rows with Novel 5K rank less than 10000.  Create two sort on the subset: one on the Nover 5K rank in ascending order, the other on the Unicode value (line 174 - 187).
+- Create a list of Kanji Unicode values, with contiguous Unicodes combined into ranges.  Then write some special Unicode characters, the Kana Unicode character ranges, and the Kanji list out to the text file, kana_kanji_subset.txt (lines 188 - 212).
+- Write all of the Kanji meanings as C character strings into a C header file, kanji_ms.h.  The naming of each string conincides with the associated Kanji's Unicode number.  An ordered list of Kanji Unicodes and their Novel 5K ranks is also created (lines 214 - 229).
+- Write the collected Kanji data to a C header file, kanji_md.h.  Use the ordered list to to assure that the Kanji metadata structures are named according to the associated Kanji's Unicode (lines 231 - 263).
+- Create dataframes for the Onyomi, Kunyomi, and Nanori cross-references (line 265 - 272).
+- Interating on each row of dataframe df1 perform the following (line 275):
+  - For each Onyomi in the row (line 277):
+    - Determine whether it is a suffix or not (lines 278 - 283).
+    - Determine whether the Onyomi is already in a row of the Onyomi data frame, appeding the new data if it is, or adding a new row if it is not present (lines 289 - 305).
+  - For each Kunyomi in the row (line 308):
+    - Determine whether it is a prefix, suffix, or neither (lines 309 - 316).
+    - Isolate Okurigana if present (lines 318 - 325).
+    - Determine whether the Kunyomi is already in a row of the Kunyomi data frame, appeding the new data if it is, or adding a new row if it is not present (lines 327 - 371).
+  - For each Nanori in the row (line 374):
+    - Isolate Okurigana if present (lines 377 - 383).
+    - Determine whether the Nanori is already in a row of the Nanori data frame, appeding the new data if it is, or adding a new row if it is not present (lines 385 - 402).
+- For each row in the Onyomi dataframe (df2), sort the Kanji for each reading by its freq list in ascending order.  Then sort the dataframe by the reading value in ascending order (lines 405 - 412).
+- 
+
+
+
 
 
 Describe each data file in this directory, its source, and any modifications made to simplify processing.  
