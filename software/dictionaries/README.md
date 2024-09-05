@@ -50,6 +50,9 @@ The Kanji metadata structure (kanji_md) refrences information about a Kanji asso
 The rank value is used when generating a list of Kanji and Japanese word for the reading (Kana characters) provided.  The list is ordered such that Japanese word are listed first, followed by Kanji, with the more common listed first.
 
 ## Programmatic dictionary file generation
+
+**NOTE: This section is only useful if one wants to understand how the dictionary files are generated.  These files have already been generated and placed in their appropriate directories.  If you want to make changes to the dictionary files, then the Python script will need to be run and the files copied to the directory containing the other source code.**
+
 The very large number of readings and their associated Kanji characters and Japanese words made it a big challenge to create all of the data structures for the four dictionaries.  It was decided to generate the dictionaries programmatically using a Python script.  This ensured consistency of data structure content and quick regeneration, when needed, to change or correct content.
 
 The Python script, kana_kanji_dictionary.py has over 1400 lines of code and comments (fortunately!).  It was developed using Python 3.8.0.  The following Python libraries required by the script:
@@ -116,7 +119,7 @@ A fairly high-level flow of the Python script is as follows:
   - Then sort the dataframe by the reading value in ascending order (line 434).
 - Sort the Nanori dataframe (df4) by the reading value in ascending order (line 445).
 - Load in a list of mappings from Kana to least-significat byte of Unicode value and converting a Python dictionary (line 447 - 451).
-- Output the Onyomi data structures to the file onyomi.h, first adding two new columns to the data frame (lines 453 - 458).
+- Output the Onyomi data structures to the file onyomi.h, first adding two new columns to the dataframe (lines 453 - 458).
   - Writing the structure typedefs to the file (lines 494 - 522)
   - Iterating on each row of sorted dataframe df2Sort (line 525):
     - Generate a Murmur3 hash key for the Kana reading (lines 526 - 536).
@@ -127,7 +130,7 @@ A fairly high-level flow of the Python script is as follows:
   - Write out the typedef for the Balanced BST to the file (lines 578 - 593).
   - Pull out the columns from the sorted dataframe df2Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 595 - 599).
   - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 597 - 603).
-- Output the Kunyomi data structures to the file kunyomi.h, first adding two new columns to the data frame (lines 609 - 614).
+- Output the Kunyomi data structures to the file kunyomi.h, first adding two new columns to the dataframe (lines 609 - 614).
   - Writing the structure typedefs to the file (lines 648 - 676)
   - Iterating on each row of sorted dataframe df3Sort (line 679):
     - Generate a Murmur3 hash key for the Kana reading (lines 680 - 690).
@@ -138,7 +141,7 @@ A fairly high-level flow of the Python script is as follows:
   - Write out the typedef for the Balanced BST to the file (lines 806 - 821).
   - Pull out the columns from the sorted dataframe df3Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 823 - 827).
   - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 830 - 833).
-- Output the Nanori data structures to the file nanori.h, first adding two new columns to the data frame (lines 838 - 843).
+- Output the Nanori data structures to the file nanori.h, first adding two new columns to the dataframe (lines 838 - 843).
   - Writing the structure typedefs to the file (lines 877 - 905)
   - Iterating on each row of sorted dataframe df4Sort (line 908):
     - Generate a Murmur3 hash key for the Kana reading (lines 909 - 919).
@@ -149,10 +152,44 @@ A fairly high-level flow of the Python script is as follows:
   - Write out the typedef for the Balanced BST to the file (lines 1003 - 1018).
   - Pull out the columns from the sorted dataframe df4Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 1020 - 1024).
   - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 1025 - 1030).
+- Read in the Core 10K spreadsheet as a dataframe, dfC10K, and create a subset dataframe with just the Reading, Kanji, and Definition columns, dfPart1.  Add columns for rank and source, setting all to -1 and 'Core10K', respectively (lines 1038 - 1046).
+- Read in the modified Core 5K Frequency spreadsheet as a dataframe, dfC5K (lines 1050 - 1052).
+- Iterate on each row of the dataframe dfC5K, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1055 - 1064).
+- Iterate on each row for the dataframe dfC5K, determining whether it is already in the dfC10K dataframe.  If it is, update the corresponding row of dataframe dfPart1 with the dfC5K rank value, which is the row number.  If is not matched, add a new row to dataframe dfPart1 with the new Kanji data and rank, with the source being 'Core5K' (lines 1066 - 1089).
+- Copy the updated dataframe dfPart1 to a new dataframe dfPart2 (line 1092).
+- Read in the modified Core 6K spreadsheet as dataframe, dfC6K (line 1095).
+- Iterate on each row of the dataframe dfC6K, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1097 - 1106).
+- Iterate on each row for the dataframe dfC6K, determining whether it is already in the dfPart1 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data and rank equal to -1, with the source being 'Core6K' (lines 1109 - 1126).
+- Copy the updated dataframe dfPart2 to a new dataframe dfPart3 (line 1092).
+- Read in the modified Jukujikun readings file as dataframe, dfJuku (line 1132).
+- Iterate on each row of the dataframe dfJuku, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1134 - 1143).
+- Iterate on each row for the dataframe dfJuku, determining whether it is already in the dfPart2 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data and rank equal to -1, with the source being 'Juku' (lines 1147 - 1165).
+- Read in the 44492 japanese word file as dataframe, df44492 (line 1170).
+- Iterate on each row for the dataframe df44492, determining whether it is already in the dfPart3 dataframe.  If it is, update rank information in the row(s) of dfPart3 according current row of df44492 plus 1.  There could be multiple results, so all must be updated.  If is not matched, no nothing (lines 1172 - 1181).
+- Determine which rows in dfPart3 did not get ranked and drop them, creating the dictionary dataframe dfDict1 (lines 1183 - 118).
+- Remove all word from dataframe dfDict1 that do not contain Kanji, creating another dictionary dataframe dfDict2 (line 1192 - 1206).
+- Set an arbitrary upper limit for ranked words, maxRank (lines 1209 - 1229).
+- Determine which words in dataframe dfDict2 exceed the maxRank.  Drop those words, creating the final dictionary dataframe dfDict3 (lines 1230 - 1232).
+- Create an empty dataframe df5, with columns 'Reading', 'WordList', and 'MeaningList'. (line 1238).
+- Iterate of the rows of dataframe dfDict3 (line 1241):
+  - Determine whether the reading for the row in dataframe dfDict3 is already in dataframe df5 (line 1243).
+    - If the reading is present, determine whether the word (called 'Kanji') is already associated with that reading.  If not, for that row in df5, append the word to the word list and the meaning to the meaning list.  If it is, just add the new meaning to the meaning list (lines 1246 - 1258).
+    - If the reading is not present, add a new row to dataframe df5 with the reading, forming new word list and meaning list (lines 1259 - 1266).
+- Sort dataframe df5 according to the reading in ascending order, creating a new dataframe, df6Sort.
 
+- Output the Dictionary data structures to the file dictionary.h, first adding two new columns to the dataframe df6Sort (lines 1271 - 1276).
+  - Writing the structure typedefs to the file (lines 1309 - 1337)
+  - Iterating on each row of sorted dataframe df6Sort (line 1340):
+    - Generate a Murmur3 hash key for the Kana reading (lines 1343 - 1352).
+    - Add the Kana representation as an integer value and a byte string to the row for generating the Balanced BST later (lines 1353 - 1355).
+    - Iterate on each element of the word list (line 1359):
+      - Write out the Affix enumeration list, which has only the values 'jword', followed by 'meaning' (lines 1360 - 1362).
+      - Write out the Okurigana list, which has only the Japanese word in UTF-8 characters, followed by the meaning string (lines 1363 - 1378).
+      - Write out the Okurigana metadata that references the above Affix and Okurigana lists (lines 1379 - 1381).
+    - Write out the list of Okurigana metadata pointers (lines 1384 - 1391).
+    - Write out the Dictionary reading metadata structure referencing the list of Okurigana pointers.  The Kanji metadata list pointer is set to NULL (lines 1392 - 1394).
+  - Write out the typedef for the Balanced BST to the file (lines 1396 - 1411).
+  - Pull out the columns from the sorted dataframe df6Sort that are the Kana readings in integer form and byte string form and place them in a dataframe df6Sub.  Sort df6Sub according to the integer form in ascending order (lines 1413 - 1417).
+  - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 1419 - 1421).
 
-
-
-
-
-
+**If you have made it this far, I congratulate you!**
