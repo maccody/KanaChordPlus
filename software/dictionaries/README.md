@@ -153,18 +153,18 @@ A fairly high-level flow of the Python script, with line number references, is a
   - Write out the typedef for the Balanced BST structure to the file (lines 1003 - 1018).
   - Pull out the columns from the sorted dataframe df4Sort that are the Kana readings in integer form and byte string form and sort them according to the integer form in ascending order (lines 1020 - 1024).
   - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 1025 - 1030).
-- Read in the Core 10K spreadsheet as a dataframe, dfC10K, and create a subset dataframe with just the Reading, Kanji, and Definition columns, dfPart1.  Add columns for rank and source, setting all to -1 and 'Core10K', respectively (lines 1038 - 1046).
+- Read in the Core 10K spreadsheet as a dataframe, dfC10K, and create a subset dataframe with just the Reading, Kanji, and Definition columns, dfPart1.  Add columns for 'Rank' and 'Source', setting all values to -1 and 'Core10K', respectively (lines 1038 - 1046).
 - Read in the modified Core 5K Frequency spreadsheet as a dataframe, dfC5K (lines 1050 - 1052).
 - Iterate on each row of the dataframe dfC5K, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1055 - 1064).
 - Iterate on each row for the dataframe dfC5K, determining whether it is already in the dfC10K dataframe.  If it is, update the corresponding row of dataframe dfPart1 with the dfC5K rank value, which is the row number.  If is not matched, add a new row to dataframe dfPart1 with the new Kanji data and rank, with the source being 'Core5K' (lines 1066 - 1089).
 - Copy the updated dataframe dfPart1 to a new dataframe dfPart2 (line 1092).
 - Read in the modified Core 6K spreadsheet as dataframe, dfC6K (line 1095).
 - Iterate on each row of the dataframe dfC6K, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1097 - 1106).
-- Iterate on each row for the dataframe dfC6K, determining whether it is already in the dfPart1 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data and rank equal to -1, with the source being 'Core6K' (lines 1109 - 1126).
+- Iterate on each row for the dataframe dfC6K, determining whether it is already in the dfPart1 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data, 'Rank' set to -1, and the 'Source' being 'Core6K' (lines 1109 - 1126).
 - Copy the updated dataframe dfPart2 to a new dataframe dfPart3 (line 1092).
 - Read in the modified Jukujikun readings file as dataframe, dfJuku (line 1132).
 - Iterate on each row of the dataframe dfJuku, determining whether each word has Kanji that are in the subset of 6100+ most common Kanji (lines 1134 - 1143).
-- Iterate on each row for the dataframe dfJuku, determining whether it is already in the dfPart2 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data and rank equal to -1, with the source being 'Juku' (lines 1147 - 1165).
+- Iterate on each row for the dataframe dfJuku, determining whether it is already in the dfPart2 dataframe.  If it is, do nothing, as there is no rank information available.  If is not matched, add a new row to dataframe dfPart2 with the new Kanji data, 'Rank' set to -1, and the 'Source' being 'Juku' (lines 1147 - 1165).
 - Read in the 44492 japanese word file as dataframe, df44492 (line 1170).
 - Iterate on each row for the dataframe df44492, determining whether it is already in the dfPart3 dataframe.  If it is, update rank information in the row(s) of dfPart3 according current row of df44492 plus 1.  There could be multiple results, so all must be updated.  If is not matched, no nothing (lines 1172 - 1181).
 - Determine which rows in dfPart3 did not get ranked and drop them, creating the dictionary dataframe dfDict1 (lines 1183 - 118).
@@ -189,7 +189,7 @@ A fairly high-level flow of the Python script, with line number references, is a
       - Write out the Okurigana metadata that references the above Affix and Okurigana lists (lines 1379 - 1381).
     - Write out the list of Okurigana metadata pointers (lines 1384 - 1391).
     - Write out the Dictionary reading metadata structure referencing the list of Okurigana pointers.  The Kanji metadata list pointer is set to NULL (lines 1392 - 1394).
-  - Write out the typedef for the Balanced BST to the file (lines 1396 - 1411).
+  - Write out the typedef for the Balanced BST structure to the file (lines 1396 - 1411).
   - Pull out the columns from the sorted dataframe df6Sort that are the Kana readings in integer form and byte string form and place them in a dataframe df6Sub.  Sort df6Sub according to the integer form in ascending order (lines 1413 - 1417).
   - Pull out the sorted Kana reading in byte string form and print out the Balance BST structures using the helper function print_balanced_bst (lines 1419 - 1421).
 
