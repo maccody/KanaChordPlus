@@ -24,7 +24,8 @@ After the font file is downloaded, it needs to be modifed to compile properly wi
 >#endif  
 
 Edit this block of code to have only one include statement:
->#include "lvgl.h"  
+>#include "lvgl.h"
+
 Save the file and copy it into the directory containing the other source code before compiling.
 
 
