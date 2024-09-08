@@ -36,7 +36,9 @@ Place the KanaChord Plus source files into a new directory named KanaChordPlus. 
 Now, connect the Raspberry Pi Pico to the computer with a USB cable.  Click the Upload button to compile the KanaChord source code and upload the compiled binary to the Pico.  If the upload fails, make sure that the USB cable is securely connected to the Pico and the computer performing the programming. It may also be necessary to hold down the BOOTSEL button on the Pico while plugging the USB cable into the computer.
 
 ## Details on the KanaChord Plus software
+The software in KanaChord Plus is much more sophisticated compared to that in the original [KanaChord Keyboard](https://github.com/maccody/KanaChord).  KanaChord only has to support the typing of Kana characters.  Was accomplished by essentially a keyboard polling loop, a look-up table to match valid key combinations to Kana Unicode characters, and output through a USB keyboard emulation to the host computer.  KanaChord Plus also adds support for Kanji output, which was not trivial and required some compromises.  The [dictionaries of Kanji and Japanese words](./dictionaries/README.md), the incremental IME, and the touch screen display, with [custom large font](./lvgl/README.md), all contributed.  
 
+Fortunately, the Raspberry Pi Pico has hardware features that were not fully exploited by the KanaChord Keyboard.  One of two processing cores in the Pico were unused, as well as over 90% of the 2MB of flash ROM.  
 
 
 
@@ -48,7 +50,7 @@ Now, connect the Raspberry Pi Pico to the computer with a USB cable.  Click the 
 
 
 A high-level flowchart of the Arduino setup() and loop() functions is presented below:
-![Software_Flowchart](./images/Software_Flowchart.gif)
+![Software_Flowchart](./images/KanaChord_Plus_top_level_flowchart.gif)
 
 A lot of the keyboard processing involves determining whether a pressed key combination is valid or not.  If the combination is invalid, the Neopixels of the pressed key combination are turned red.  If the combination is valid, a Unicode key value is converted to ASCII and sent as part of a macro sequence to the USB device interface for transmission to the computer.  The macro sequence sent is determined by a three-position switch.  The macro sequences are for Microsoft Windows applications (e.g., MS Word, Wordpad, LibreOffice), Linux applications (e.g., LibreOffice, Firefox), and MacOS applications (functionality not tested yet). The setting of the Macro Mode Switch can be change at any time, while not pressing keys, to change the Unicode macro sent.  This is useful when switching between applications that use different Unicode macro sequences. For additional details, consult the commented source code.
 ## Unicode Data
