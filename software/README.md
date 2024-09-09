@@ -36,20 +36,13 @@ Place the KanaChord Plus source files into a new directory named KanaChordPlus. 
 Now, connect the Raspberry Pi Pico to the computer with a USB cable.  Click the Upload button to compile the KanaChord source code and upload the compiled binary to the Pico.  If the upload fails, make sure that the USB cable is securely connected to the Pico and the computer performing the programming. It may also be necessary to hold down the BOOTSEL button on the Pico while plugging the USB cable into the computer.
 
 ## Details on the KanaChord Plus software
-The software in KanaChord Plus is much more sophisticated compared to that in the original [KanaChord Keyboard](https://github.com/maccody/KanaChord).  KanaChord only has to support the typing of Kana characters.  Was accomplished by essentially a keyboard polling loop, a look-up table to match valid key combinations to Kana Unicode characters, and output through a USB keyboard emulation to the host computer.  KanaChord Plus also adds support for Kanji output, which was not trivial and required some compromises.  The [dictionaries of Kanji and Japanese words](./dictionaries/README.md), the incremental IME, and the touch screen display, with [custom large font](./lvgl/README.md), all contributed.  
+The software in KanaChord Plus is much more complicated compared to that in the original [KanaChord Keyboard](https://github.com/maccody/KanaChord).  KanaChord only has to support the typing of Japanese language Unicode characters (Kana and special characters) on a host computer.  This was accomplished via a keyboard polling loop, a look-up table to match valid key combinations to Unicode, and sending them through a USB keyboard emulation to the host computer.  KanaChord Plus adds support for Kanji Unicode output, which is not trivial and required some compromises.  The [dictionaries of Kanji and Japanese words](./dictionaries/README.md), the incremental IME (Input Method Editor), and the touch screen display, with [custom large font](./lvgl/README.md), all contributed to the complexities.  
 
-Fortunately, the Raspberry Pi Pico has hardware features that were not fully exploited by the KanaChord Keyboard.  One of two processing cores in the Pico were unused, as well as over 90% of the 2MB of flash ROM.  
+Fortunately, the Raspberry Pi Pico has hardware features that were not fully exploited by the KanaChord Keyboard.  One of two processing cores in the Pico are unused, as well as over 90% of the 2MB of flash ROM. Two SPI (Serial Peripheral Interface) ports and additional general purpose I/O ports also contribute to enabling the addition of extra capabilities required by the software in KanaChord Plus.
 
+Having two cores in the RP2040 microcontroller enables hardware parallelism, dividing the processing load so that no single processor is overloaded.   In the Pico, Core 0 of the RP2040 is dedicated to interfacing with the USB interface.  In the KanaChord software, Core 0 was also used to poll the keyboard.  It made sense to keep these functions together in KanaChord Plus.  Core 1 is dedicated to running the incremental IME, the display, and the touch screen, as their functoins are tied closely together.
 
-
-
-
-
-
-
-
-
-A high-level flowchart of the Arduino setup() and loop() functions is presented below:
+A high-level flowchart of the Arduino setup() and loop() functions for both Core 0 and Core 1 is presented below:
 ![Software_Flowchart](./images/KanaChord_Plus_top_level_flowchart.gif)
 
 A lot of the keyboard processing involves determining whether a pressed key combination is valid or not.  If the combination is invalid, the Neopixels of the pressed key combination are turned red.  If the combination is valid, a Unicode key value is converted to ASCII and sent as part of a macro sequence to the USB device interface for transmission to the computer.  The macro sequence sent is determined by a three-position switch.  The macro sequences are for Microsoft Windows applications (e.g., MS Word, Wordpad, LibreOffice), Linux applications (e.g., LibreOffice, Firefox), and MacOS applications (functionality not tested yet). The setting of the Macro Mode Switch can be change at any time, while not pressing keys, to change the Unicode macro sent.  This is useful when switching between applications that use different Unicode macro sequences. For additional details, consult the commented source code.
