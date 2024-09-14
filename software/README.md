@@ -9,7 +9,7 @@ The software for KanaChord Plus was developed with open-source tools and librari
    - [Adafruit Neopixel](https://github.com/adafruit/Adafruit_NeoPixel),
    - [Light and Versatile Graphics Library](https://lvgl.io/), version 8.4.
 
-Note that the source code for the Keypad library has been slightly modified for the RP2040 and the file names have been renamed accordingly.  The output drive current for the keyboard polling lines has been set to 12 milliamps, which is the maximum for the RP2040.  It was found that the default drive current of 4 milliamps provided insufficient current for the keyboard.
+Note that the source code for the Keypad library has been slightly modified for the RP2040 and the file names have been renamed accordingly.  The output drive current for the keyboard polling lines has been set to 12 milliamps, which is the maximum for the RP2040.  It was found that the default setting of 4 milliamps provided insufficient current for the keyboard.
 
 ## Unicode Data
 The file kana.h contains C++ arrays containing the 16-bit Unicode values for Kana (Hiragana and Katakana) characters, and some Chinese/Japanese/Korean punctuation and special characters.  The file kanji_md.h contains C++ structures containing 16-bit Unicode values for Kanji characters.  Details on these Unicode blocks can be found in the following PDFs:
@@ -45,14 +45,19 @@ Having two cores in the RP2040 microcontroller enables hardware parallelism, div
 The subsections below describe various elements of the KanaChord Plus software.  Note that these descriptions are not detailed and do not cover every function in the code base.  There are some helper functions that are only inferred.  Also, the flowcharts may lack some details.  The best way to fully understand the code is to study the source code itself.
 
 ### Arduino setup() and loop() functions
-A high-level flowchart of the Arduino setup() and loop() functions for both Core 0 and Core 1 is presented below:   
+A high-level flowchart of the Arduino setup() and loop() functions for Core 0 and setup1() and loop1() functions Core 1 is presented below:   
 ![Software_Flowchart](./images/KanaChord_Plus_top_level_flowchart.gif)
 
-Core 0 set up processing initializes keypad polling, Neopixel configuration, and USB keyboard emulation.  Core 0 loop processing manages keypad inputs, Neopixel states, and Unicode macro outputs through the USB keyboard emulation.  A lot of the keypad processing performed by Core 0 involves determining whether a pressed key combination is valid or not.  If the combination is invalid, the Neopixels of the pressed key combination are turned red.  When the invalid key combination is released, the key colors are restored to their proper states.  If the combination is valid, a 16-bit Unicode paired with command flags is sent to Core 1 via the Core 0-to-Core 1 FIFO.
+Core 0 setup() processing initializes keypad polling, Neopixel configuration, and USB keyboard emulation.  Core 0 loop() processing manages keypad inputs, Neopixel states, and Unicode macro outputs through the USB keyboard emulation.  A lot of the keypad processing performed by Core 0 involves determining whether a pressed key combination is valid or not.  If the combination is invalid, the Neopixels of the pressed key combination are turned red.  When the invalid key combination is released, the key colors are restored to their proper states.  If the combination is valid, a 16-bit Unicode, paired with a command flag, is sent to Core 1 via the Core 0-to-Core 1 FIFO.
 
 Unicode characters are recieved from Core 1 via the Core 1-to-Core 0 FIFO. The Unicode characters are convered to Unicode macro sequences and place into an output queue for output through the USB keyboard emulation.  The macro sequence sent is determined by a mode variable that is user-configurable and stored in non-volatile storage.  The macro sequences are for Microsoft Windows applications (e.g., MS Word, Wordpad, LibreOffice), Linux applications (e.g., LibreOffice, Firefox), and MacOS applications (functionality not tested yet).  The transmission rate of the macro code sequences is controlled to avoid sending garbled sequences to the host computer.
 
-Core 1 set up processing initializes the display and touch screen hardware, the LVGL library, and the LVGL interface.  Core 1 loop processing manages the Kana Unicode and command flags received  
+Core 1 setup() processing initializes the ILI9341 TFT display controller, the XPT2046 touch screen controller, the LVGL library, and the LVGL main interface.  Core 1 loop() processing manages the incremental IME, the LVGL display, and touch screen functions that allow the user to select Kanji and Japanese words based upon the Kana characters typed.  The simplicity of the loop belies the the functionality performed by Core 1.  There are several complex functions performed by the incremental IME and there are LVGL display and callback functions that are called.
+
+Core 1 receives 16-bit Unicode and command flag via the the Core 0-to-Core 1 FIFO.  These are separated and the command flag determines how the Kana code is inserted into the editor queue.  A command flag value of zero indicates that the Unicode is a Kana character.  This causes the Kana Unicode to be appended to the editor queue, unless the queue has been modified through selection of a Kanji or Japanese word.  In that case, the editor queue is first flushed of its contents, sent to Core 0 via the Core 1-to-Core 0 FIFO, and the Kana Unicode then placed into the emptied editor queue.  A command flag value of one indicates tha the Unicode is a special character.  The treatment If the special character is the Unicode for a wide space, The editor queue is always flushed with the The Unicode special character is always appended editor queue
+
+
+
  The setting of the Macro Mode Switch can be change at any time, while not pressing keys, to change the Unicode macro sent.  This is useful when switching between applications that use different Unicode macro sequences. For additional details, consult the commented source code.
 
 a Unicode key value is converted to ASCII and sent as part of a macro sequence to the USB device interface for transmission to the computer. 
