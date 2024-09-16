@@ -81,6 +81,7 @@ When a new Kana character is added to the Kana queue, as displayed in the editor
 Once are results are obtain from the four search operations, data for the Kanji list is generated.  The Kanji list is a list of pointers to different reading data, ordered according to the frequency (commonality) of the Kanji.  Note that Japanese words always appear first in the list, so they are common words.  The goals is to present common Japanese words followed by Kanji characters that are ranked with most commonly-used Kanji first.
 
 ### Functions to display and manage Kanji lists
+Once the Kanji list data is generated from the four sets of dictionary data, it is displayed in the Kanji list window for the user to scroll through and select a Kanji or Japanese word.  The flowcharts for diplaying, navigating, and selecting entries in the Kanji are presented below.
 
 ![Kanji display functions](./images/KanaChord_Plus_Kanji_display_functions.gif)
 
