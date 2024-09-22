@@ -60,7 +60,7 @@ Below the Editor Window, a Kanji List is generated, consisting of Japanese words
 Each entry in the Kanji List has two parts.  On the left side, the kanji character or word (one or more Kanji, sometimes with Kana) is presented.  On the right side, a definition in English is presented.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window, i.e., they are homophones, sounding the same.  
 
 The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIF below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry will not cause a selection.  
-![KanaChordPlus_demo](./images/KanaChordPlus_demo.gif)
+![KanaChordPlus_demo](./images/ima_demo.gif) ![KanaChordPlus_demo](./images/ima_demo_inset.gif)
 
 Once a Kanji or Japanese word has been selected, it can be sent to the computer by typing any Kana, punctuation, or special character.  If a Kana character is a typed, it is displayed in the Editor window, the previous content being sent to the computer.  This allows the user to build up the next set of Kana characters to form a new word or Kanji.  If a punctuation or special character is typed, it gets sent along with the current contents of the Editor Window.  The behavior of the wide space character is the same as mentioned previously, 
 
