@@ -60,15 +60,15 @@ Below the Editor Window, a Kanji List is generated, consisting of Japanese words
 Each entry in the Kanji List has two parts.  On the left side, the kanji character or word (one or more Kanji, sometimes with Kana) is presented.  On the right side, a definition in English is presented.  Definitions are provided to aid the user in making the appropriate selection.  Note that each entry on the list is pronounced according to the Kana present in the Editor Window, i.e., they are homophones, sounding the same.  
 
 The procedure for selecting a Japanese word or Kanji character is illustrated in the animated GIFs below.  Note that the left portion of a Kanji List entry must be pressed.  Pressing the definition portion of an entry will not cause a selection.  
- Typing 今 (now)           | Close-up
+ Typing 今 (now)           | Close-up (Refresh webpage if out of sync)
 :-------------------------:|:-------------------------:
 ![KanaChordPlus_demo](./images/ima_demo.gif)|![KanaChordPlus_demo_inset](./images/ima_demo_inset.gif)
 
- Typing こにちは！コーディです。 (Hello! I am Cody)| Close-up
+ Typing こにちは！コーディです。 (Hello! I am Cody)| Close-up (Refresh webpage if out of sync)
 :-------------------------:|:-------------------------:
 ![KanaChordPlus_demo](./images/kana_only_demo.gif)|![KanaChordPlus_demo_inset](./images/kana_only_demo_inset.gif)
 
- Typing 今何時ですか？(What time is it now?) | Close-up
+ Typing 今何時ですか？(What time is it now?) | Close-up (Refresh webpage if out of sync)
 :-------------------------:|:-------------------------:
 ![KanaChordPlus_demo](./images/kanji_kana_demo.gif)|![KanaChordPlus_demo_inset](./images/kanji_kana_demo_inset.gif)
 
@@ -85,7 +85,7 @@ Some Kanji characters with kunyomi readings have associated okurigana, or follow
 
 Scrolling and selection of Kanji within the Okurigana Window follows the same methods as explained for the Kanji List.  
 
- Typing 見える (appear) | Close-up
+ Typing 見える (appear) | Close-up (Refresh webpage if out of sync)
 :-------------------------:|:-------------------------:
 ![KanaChordPlus_demo](./images/okurigana_demo.gif)|![KanaChordPlus_demo_inset](./images/okurigana_demo_inset.gif)
 
