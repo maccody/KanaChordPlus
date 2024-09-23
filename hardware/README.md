@@ -1,7 +1,7 @@
 # KanaChord Plus Hardware
 
 ## Electronics Components
-KanaChord Keyboard uses following electronics parts:
+KanaChord Plus keyboard uses following electronics parts:
 - 1 x Raspberry Pi Pico microcontroller
 - 1 x [Adfruit](https://www.adafruit.com) [NeoKey 5x6 Ortho Snap-Apart Mechanical Key Switches w/ NeoPixel - For MX Compatible Switches](https://www.adafruit.com/product/5157)
 - 30 x Cherry MX RGB frame-mount mechanical key switches, e.g., [Cherry MX Brown Switches](https://www.cherrymx.de/en/cherry-mx/mx-original/mx-brown.html) (does not count spares)
@@ -22,21 +22,21 @@ KanaChord Keyboard uses following electronics parts:
 - Heat-shrink tubing for enclosing the unidirectional level shifter
 
 ## Keyboard Schematics
-Below is a pictorial schematic of the keypad portion of the KanaChord keyboard.
+Below is a pictorial schematic of the keypad portion of the KanaChord Plus keyboard.
 
 ![Keypad_Schematic](./images/KanaChord_Plus_schematic_part1.gif)
 
 While the Neopixels of the Ortho Snap-Apart board can opperate at 3.3 Volts, the 3.3-Volt regulator on the Pico cannot supply enough current.  Therefore, the Neopixels are powered by the Pico's 5-Volt VSYS output.  Consequently, a unidirectional level shifter is used to convert the low-voltage Neopixel signal, NP(LV), to a high-voltage Neopixel signal, NP(HV).  The BC547 and resistors are used to implement the unidirectional level shifter circuit.
 
-Below is a pictorial schematic of the Raspberry Pi Pico and display portion of the KanaChord keyboard.
+Below is a pictorial schematic of the Raspberry Pi Pico and display portion of the KanaChord Plus keyboard.
 
 ![Pico_Schematic](./images/KanaChord_Plus_schematic_part2.gif)
 
-The right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 21 through 27, and 36 through 39 of the Pico.  
+Right-angle header pins are soldered in 'gull-wing' fashion to pins 1 through 20, 21 through 27, and 36 through 39 of the Pico.  The connectors for the various cables are plugged into the headers during the electrical assembly.
 
 ## Electrical Assembly
 ### Keypad Preparation
-Before assembly, the snap-apart keyboard must be broken into two pieces to form two PCBs (Printed Circuit Boards) for the left and right keypad assemblies.  As shown in the pictoral schematic above and the pictures below, cut apart the keyboard so that the bottom two rows form the left keypad and the top three rows form the right keypad.  
+Before soldering the keypad wiring harnesses, the snap-apart keyboard must be broken into two pieces to form two PCBs (Printed Circuit Boards) for the left and right keypad assemblies.  As shown in the pictoral schematic above and the pictures below, cut apart the keyboard so that the bottom two rows form the left keypad and the top three rows form the right keypad.  
 ![NeoKey_cut_apart](./images/keyboard_cut_apart.jpg)
 
 Rather than actually bending the PCB to snap it, it is recommended to use a thin saw to cut the bridges between the rows.  DO NOT cut off the blank sections on the top and bottom of the PCB, as the mounting holes will be used to help position the keypads in the keyboard enclosure.
