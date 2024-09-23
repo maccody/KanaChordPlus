@@ -107,7 +107,7 @@ KanachordPlus' software was developed with the Arduino IDE (version 1.8.19), Ear
 KanaChordPlus' circuit design and the STL files for the keycaps, component mounting parts, and enclosure parts are placed under Creative Commons Attribution-NonCommercial-NoDerivatives license.
 
 ![GNU_GPL_V3](./images/GNU_GPL_V3.png)
-KanaChord Plus' source code that I wrote (KanaChordChordPlus.ino, kana.h, kbd_mgt.cpp, kbd_mgt.h, **AND OTHERS**) are placed under GNU General Public License, Version 3.0.
+KanaChord Plus' source code that I wrote (KanaChordChordPlus.ino, dictionary.h, display.cpp, display.h, kana.h, kanji_md.h, kanji_ms.h, kbd_mgt.cpp, kbd_mgt.h, kdict.cpp, kdict.h, kunyomi.h, loop1.h, nanori.h, onyomi.h, settings.cpp, and settings.h) are placed under GNU General Public License, Version 3.0.
 
 The slightly-modified versions of Mark Stanley's Key and Keypad libraries (Key2040.cpp, Key2040.h, Keypad2040.cpp, and Keypad2040.h) fall under the license of the original sources.
 
@@ -116,8 +116,8 @@ My goal is to provide an axuilary keyboard that is useful to those who want to s
 
 ## The Future of KanaChord Plus Keyboard 【カナコード・プラス・キーボードの今後】
 The recent (August 2024) announcement of the Raspberry Pi Pico 2 provides a direct upgrade path for several features in KanaChord Plus:
-- Since the Pico 2 is a drop-in replacement for the Pico 1, there will be no changes in the electronics hardware, unless new capabilities are needed.
+- Since the Pico 2 is a drop-in replacement for the Pico 1, there will be no changes in the electronics hardware, unless new capabilities are added that require it.
 - The higher performance of the RP2340 microcontroller will make the KanaChord Plus software run faster and be more responsive.
-- The increase in size of the flash rom from 2 MB to 4 MB will enable an significant increase in the number of Kanji and/or Japanese words supported.
+- The increase in size of the flash rom from 2 MB to 4 MB will enable a significant increase in the number of Kanji and/or Japanese words supported.
 
 There will be a delay in updating KanaChord Plus to use the Pico 2, as it will take some time for component availabiltiy and updates to software libraries.  This Github site will be updated when support for the Pico 2 is realized.
