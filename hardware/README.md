@@ -92,7 +92,7 @@ The wiring of the power wye is shown in the picture below.
 
 ![power_wye](./images/KanaChord_Plus_power_wye.jpg)
 
-The overall length of the wires should be approximately 6 cm (2.25 inches)  Each wire is spliced half way to form two wires.  Each is covered with heat-shrink tubing.  Nine (9) crimp terminals are applded to the ends of the wires.  As shown in the picture, insert the terminals at the 'top' of the wye into two, three (3) terminal connector shells.  Make sure to keep the wiring order consistent between the two connectors.  The terminals at the 'bottom' of the wye are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the terminal pins for 2 and 4, which is 3V3_EN Pin 37 on the Pico.
+The overall length of the wires should be approximately 6 cm (2.25 inches).  Each wire is spliced half way to form two wires.  Each is covered with heat-shrink tubing.  Nine (9) crimp terminals (three female, six male) are attached to the ends of the wires.  As shown in the picture, insert the terminals at the 'top' of the wye into two, three (3) terminal connector shells.  Make sure to keep the wiring order consistent between the two connectors.  The terminals at the 'bottom' of the wye are inserted into a four (4) terminal connector shell.  Note that there will be an unused place between the terminal pins for 2 and 4, which is 3V3_EN Pin 37 on the Pico.
 
 ## 3D-Printed Keycaps
 The keycaps for the KanaChord Keyboard were created in TinkerCAD, as shown in the illustration below.  The STL files for the left-hand and right-hand keycap sets can be viewed with the Github STL viewer by clicking on the STL files listed above.
@@ -106,16 +106,13 @@ The enclosure for the KanaChord Keyboard was also created in TinkerCAD, as shown
 
 ![KanaChord_Plus_Keyboard_Case](./images/KanaChord_Plus_Keyboard_Case.png)
 
-The left and right keycase enclosures were created using 0707070user's OpenSCAD program [Customizable snap-fit electronics project box enclosure](https://www.thingiverse.com/thing:2866563). It is licensed under the [Creative Commons - Attribution license](https://creativecommons.org/licenses/by/4.0/). The enclosure components are flipped so tha the lids now act as baseplates for the keyboard enclosure. The enclosures were edited to create the key switch holes of the integral keyplates, the switch and Pico mounts, and pass-through holes for the keyboard feet, and the USB cable.  
+The left and right keycase enclosures were created using 0707070user's OpenSCAD program [Customizable snap-fit electronics project box enclosure](https://www.thingiverse.com/thing:2866563). It is licensed under the [Creative Commons - Attribution license](https://creativecommons.org/licenses/by/4.0/). The enclosure components are flipped so that the lids now act as baseplates for the keyboard enclosure. The enclosures were edited to create the key switch holes of the integral keyplates, the Pico board mount, and pass-through holes for the keyboard feet, and the USB cable.  
 
-The enclosure was designed in halves to fit on the build plate of a Crealty Ender 3 Pro 3D printer.  All components were sliced with Cura using the Low Quality (0.28mm), with 20% infill using the standard in-fill pattern, and no supports were used.  The case components were prited in black PLA, although any color can be used, if desired.
+The enclosure was designed in halves to fit on the build plate of a Crealty Ender 3 Pro 3D printer.  All components were sliced with Cura using the Low Quality (0.28mm) setting, with 20% infill using the standard in-fill pattern, and no supports were used.  The case components were prited in black PLA, although any color can be used, if desired.
 
 The screw and wingnut were created using mike_mattala's OpenSCAD program [NUT JOB | Nut, Bolt, Washer and Threaded Rod Factory](https://www.thingiverse.com/thing:193647).  It is licensed under [Creative Commons - Attribution - Non-Commercial license](https://creativecommons.org/licenses/by-nc/4.0/).  Print the screw horizontally, so that the layers are parallel to the long axis of the screw.  This will provide strength to the screw along the axis of tension when the wing nut is tightened.  
 
-
-
 ## Mechanical Assembly
-
 ### Applying PCB Cushions
 The keypad PCBs are connected to the key switches via sockets.  To prevent the PCBs from coming loose from the key switches, supports are provided to keep the PCBs in place. Two of these supports are shown in the photo below.
 
@@ -134,7 +131,7 @@ Prior to mounting the key switches and keypad PCBs, it is highly recommended to 
 ![key_switch_socket_breakin](./images/key_switch_socket_breakin.jpg)
 
 ### Preparing the Enclosures for the Key Switches
-It may be necessary to slightly widen the keyplate holes on the enclosures prior to attaching the key switchs and keypads.  For any give hole, try to insert a key switch without any widening.  If a switch plugs in easily, then no widening is needed.  For those holes needing widening, use a flat-sided jewler's file to slightly widen all sides of the hole.  In practice, it should not take much filing to allow a switch to plug in easily.
+It may be necessary to slightly widen the keyplate holes on the enclosures prior to attaching the key switchs and keypads.  For any given hole, try to insert a key switch without any widening.  If a switch plugs in easily, then no widening is needed.  For those holes needing widening, use a flat-sided jewler's file to slightly widen all sides of the hole.  In practice, it should not take much filing to allow a switch to plug in easily.
 
 ![key_switch_hole_cleanup](./images/key_switch_hole_cleanup.jpg)
 
@@ -144,7 +141,7 @@ First, slide on the keyboard bracket on to the right keyboard enclosure.  Make s
 
 Start at one end of the enclosure and insert a key switch through the hole of the keyplate into the socket of the PCB. Place a finger against the key socket, on the bottom side of the PCB, to support key switch insertion. Having a keycap on the switch will make it easier to press the switch in.  Once the switch is inserted, go to the opposite end and insert another key switch as before.  Doing this will stablize the PCB position for inserting the rest of the key switches.  Working from the ends towards the center of the enclosure, plug in more keys until all eighteen switched are plugged in.
 
-Now insert the left keypad PCB into the left keyboard enclosure.  As with the right keypad, align the key socket with the holes in the integral keyplate.  Insert the key switches, again working from both end of the enclosure to the center.  Once all of the key switches are inserted, slide the left keyboard enclosure onto the other side of the keyboard bracket.  While doing this, fold up the male keyboard connector to clear the bracket and then plug it into the female keyboard connector.
+Now insert the left keypad PCB into the left keyboard enclosure.  As with the right keypad, align the key sockets with the holes in the integral keyplate.  Insert the key switches, again working from both ends of the enclosure to the center.  Once all of the key switches are inserted, slide the left keyboard enclosure onto the other side of the keyboard bracket.  While doing this, fold up the male keyboard connector to clear the bracket and then plug it into the female keyboard connector.
 
 After completing these steps the keyboard assembly show look as shown in the picture below.
 
