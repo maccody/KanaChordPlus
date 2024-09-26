@@ -13,7 +13,7 @@ Finding extensive lists (more than a few thousand) of Japanese words containing 
 Several approaches were considered for storing the dictionaries in KanaChord Plus:
 1. External flash card accessed through the Pico's SPI interface, using a flash card reader library - plenty of storage space, relatively slower access, and driver overhead.
 2. Use part of the Pico's flash ROM as a flash drive, using a flash card reader library - Limited space (less than two megabytes) with file system overhead, about four times faster access with QSPI compared to SPI, but same driver overhead.
-3. Create data structures representing the dictionaries that are stored in the flash ROM's program memory and accessed directly - Limited storage space, though more efficiently used, and fastest access possible, with no driver overhead.
+3. Create data structures representing the dictionaries that are stored in the flash ROM's program memory and accessed directly - Limited storage space (less than two megabytes), though more efficiently used, and fastest access possible, with no driver overhead.
 
 The third option was chosen for this implementation of KanaChord Plus.  Speed in retrieving Kanji and English meaning data for the Kana currently typed will impact the responsiveness of the keyboard and the overall user experience.  It is anticipated that a future version of KanaChord Plus would use a board-compatible, RP2040-based microcontroller with 4MB, 8MB, or 16MB of flash ROM.  The recent (August 2024) introduction of the Raspberry Pi Pico 2 (RP2340-based microcontroller) with 4MB of flash ROM, would be a suitable replacement. The faster microcontroller could maintain or improve responsiveness, while providing extra flash ROM stoarge for either more Kanji, more Japanese words, or both!  
 
@@ -22,7 +22,7 @@ Several data structures were created to store the content of the four dictionari
 
 A [Balanced](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree) [Binary Search Tree (BST)](https://en.wikipedia.org/wiki/Binary_search_tree) is employed to quickly search each dictionary.  The sorted keys are hashes of Kana character sequences.  The hash algorithm used is [32-bit Murmur Hash version 3](https://en.wikipedia.org/wiki/MurmurHash) - the implementation code is found on the referenced Wikipedia page.  Each node of the BST is a data structure (bbt_node) that contains the following elements:   
 - An unsigned 32-bit key that is a Murmur 3 hash of a reading (Kana character sequence).
-- A pointer to a reading matadata structure  (reading_md* rmd) for the supplying the data related to the reading.
+- A pointer to a reading matadata structure  (reading_md* rmd) for containing the data related to the reading.
 - Pointers to two child BST structures (bbt_node* lnode, bbt_node* rnode), which can be NULL if there is no child for a branch of the tree.
 
 During the search down the BST of a dictionary, the submitted reading hash is compared to a structure's hash key.  If the submitted hash is either less than or greater than the hash key, the search continues using the structure referenced by the appropriate pointer.  If that pointer is null, then there is no match for the submitted reading hash.  If the submitted hash is equal to the key in the current BST structure, then the pointer to the associated reading metadata structure is returned.  
@@ -34,16 +34,16 @@ The reading metadata structure (reading_md) provides information regarding the K
 
 Each reading metadata structure pointer returned from a directory search is accessed to build up a list of candidate Kanji and Japanese words that the user can choose from to replace the Kana character sequence that was entered.
 
-The Okurigana / Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the Onyomi, Kunyomi, and Nanori dictionaries, this metadata structure references any Okurigana associated with a Kanji.  There can be multiple Okurigana that are referenced.  For the Japanese word dictionary, this metadata structure references the Japanese word (combination of Kana and Kanji characters, encoded in UTF-8) and the meaning of the word in English.  There will be only one Japanese word and meaning referenced.
+The Okurigana / Japanese word metadata structure (okuri_md) has alternate uses depending upon which dictionary it is being used.  For the Onyomi, Kunyomi, and Nanori dictionaries, this metadata structure references any Okurigana associated with a Kanji.  There can be multiple Okurigana that are referenced.  For the Japanese word dictionary, this metadata structure references the Japanese word (combination of Kana and Kanji characters, encoded in UTF-8) and the meaning of the word in an English string.  There will be only one Japanese word and meaning string referenced.
 
 The Okurigana / Japanese word metadata structure contains the following elements:
-- An unsigned 8-bit value (len) indicating the number of Affix enumerations and Okurigana strings or Japanese word / meaning strings.
-- Pointer to array of Affix enumerations (affix_enum *alist).  For the Onyomi, Kunyomi, and Nanori dictionaries, the relevant enumerations are: none (simple reading without context) , prefix (prefix reading, placed before other Kanji), and suffix (suffix reading, placed after other Kanji).  For the Japanese word dictionary, the relevant enumerations are: jword (Japanese word in corresponding index of olist) and meaning (meaning string in corresponding index of olist).  The content of alist is always one 'jword', followed by one 'meaning'.
+- An unsigned 8-bit value (len) indicating the number of Affix enumerations and Okurigana strings or Japanese word / English meaning strings.
+- Pointer to array of Affix enumerations (affix_enum *alist).  For the Onyomi, Kunyomi, and Nanori dictionaries, the relevant enumerations are: none (simple reading without context) , prefix (prefix reading, placed before other Kanji), and suffix (suffix reading, placed after other Kanji).  For the Japanese word dictionary, the relevant enumerations are: jword (Japanese word in corresponding index of olist) and meaning (English meaning string in corresponding index of olist).  The content of alist is always one 'jword', followed by one 'meaning'.
 - Pointer to array of Okurigana or Japanese words/meanings (char **clist).  All characters are UTF-8 encoded. For the Japanese word dictionary, the first string is always the Japanese word and the second string is always the meaning in English.
 
 The Kanji metadata structure (kanji_md) references information about a Kanji associated with a reading.  The Kanji metadata structure contains the following elements:
 - Unsigned 16-bit Unicode value (unicode) for the Kanji.
-- Unsigned 16-bit value indicating rank order (rank) for the Kanji - lower value indicates a more common Kanji.
+- Unsigned 16-bit value indicating rank order (rank) for the Kanji - lower value indicates common Kanji.
 - Character pointer to string containing English meaning for the Kanji (char *meaning).
 
 The rank value is used when generating a list of Kanji and Japanese words for the reading (Kana characters) provided.  The list is ordered such that Japanese word are listed first, followed by Kanji, with the more common listed first.
@@ -60,14 +60,17 @@ The Python script, kana_kanji_dictionary.py has over 1400 lines of code with com
 - Itertools (itertools) - Advanced iteration function library.
 - Murmur Hash version 3 (mmh3) - Murmur hash generation library.
 
+The program is invoked from the command line as follows:  
+`python kana_kanji_dictionary.py`
+
 The following files are read by the Python script during processing:
 - Novel 5K most common Kanji (Novel_5K.csv). Source: [Novel 5k](https://docs.google.com/spreadsheets/d/1l2MNM5OWznIRVm98bTCA1qPNAFnM48xJIyUPtchxyb0/edit?usp=sharing).
 - Kanji Dict 2 (kanjidic2.xml) Source: [The KANJIDIC Project](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project).
 - List of Kana characters and their corresponding least-significant byte of Unicode values (kana_list.csv).
 - Core 10K list of over ten thousand common Japanese words with pronunciations and meanings (Core10k.csv). Source: [Core 10000](https://core6000.neocities.org/10k/).
-- Core 5K Frequency list of over five thousand of the most common Japanese words, with pronunciations and meanings (Core5kFrequencyMod3.csv).  Modified to place single entries on each line.  Source: [Core 5000 Frequency](https://core6000.neocities.org/freq/).
-- Core 6k list of over six thousand common Japanese words with pronunciations and meanings (Core6kMod.csv).  Modified to place single entries on each line. Source: [Core 6000](https://core6000.neocities.org/).
-- List of official and unofficial Jukujikun, or Japanese words with pronunciations that do not match the Kanji representing those words (jukujikun_mod.txt).  Modified to combine official and unofficial lists. Source: [Kanjium - the ultimate kanji resource](https://github.com/mifunetoshiro/kanjium).
+- Core 5K Frequency list of over five thousand of the most common Japanese words, with pronunciations and meanings (Core5kFrequencyMod3.csv).  Original CSV file has been modified to place single entries on each line.  Source: [Core 5000 Frequency](https://core6000.neocities.org/freq/).
+- Core 6k list of over six thousand common Japanese words with pronunciations and meanings (Core6kMod.csv).  Original CSV file modified to place single entries on each line. Source: [Core 6000](https://core6000.neocities.org/).
+- List of official and unofficial Jukujikun, or Japanese words with pronunciations that do not match the Kanji representing those words (jukujikun_mod.txt).  Original text file modified to combine official and unofficial lists. Source: [Kanjium - the ultimate kanji resource](https://github.com/mifunetoshiro/kanjium).
 - 44492 Japanese Word frequency list (44492-japanese-words-latin-lines-removed.txt).  Source: [hingston/Japanese Github repo](https://github.com/hingston/japanese/blob/master/44492-japanese-words-latin-lines-removed.txt).
 
 The following files are programatically generated by the Python script:
