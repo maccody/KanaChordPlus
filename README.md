@@ -47,7 +47,7 @@ Keyboard error lighting with press of ﾞ, な, and あ key combination.
 ![KanaChordPlus_error_2](./images/KanaChordPlus_error_2.jpg)
 
 ### 'Incremental' Input Method Editor 【「インクリメンタル」インプットメソッドエディター】
-As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  Over 6000 of the most common Kanji charaters and over 5000 of the most common Japanese words containing Kanji are available in KanaChord Plus.  
+As mentioned previously, Kanji characters and Japanese words containing Kanji are typed via an 'incremental' Input Method Editor (IME).  Over 6,100 of the most common Kanji charaters and over 6,200 of the most common Japanese words containing Kanji are available in KanaChord Plus.  
 
 As Kana characters are typed, they are presented at the top of the KanaChord Plus display in an single-line Editor Window.  The Editor Window can hold up to nine characters, either Kana or Kanji.  If only Kana characters have been typed, they can be sent to the computer by pressing any punctuation or special character mentioned previously.  The Kana characters will be displayed on the computer followed by the punctuation or special character pressed, with the exception of the wide space character.  Japanese writing does not normally have spaces between words, so it would be unusual to include the wide space character in the output.  To purposely display a wide space character, make sure the Editor Window is empty of characters first before pressing the wide space (**Spc**) key.
 
